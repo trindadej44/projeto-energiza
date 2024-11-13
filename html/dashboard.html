@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energize - Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #22c55e;
+            --secondary-color: #14b8a6;
+            --success-color: #22c55e;
+            --info-color: #0ea5e9;
+        }
+
+        body {
+            background-color: #f8f9fc;
+        }
+
+        .sidebar {
+            background: linear-gradient(-45deg, #22c55e, #14b8a6, #0ea5e9, #22c55e);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+            z-index: 2;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar .nav-link:hover {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .sidebar .nav-link.active {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .metric-card {
+            border-left: 4px solid;
+        }
+
+        .metric-card.consumption {
+            border-left-color: var(--primary-color);
+        }
+
+        .metric-card.solar {
+            border-left-color: var(--success-color);
+        }
+
+        .metric-card.devices {
+            border-left-color: var(--info-color);
+        }
+
+        .metric-card.costs {
+            border-left-color: var(--secondary-color);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #22c55e, #14b8a6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #22c55e, #14b8a6);
+            border: none;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(90deg, #14b8a6, #22c55e);
+        }
+
+        .chart-card {
+            margin-bottom: 1.5rem;
+        }
+
+        .table td, .table th {
+            padding: 1rem;
+        }
+
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #22c55e, #14b8a6);
+            z-index: 1000;
+            transition: width 0.2s ease-out;
+        }
+
+        /* Adicionando estilos para tornar o layout mais responsivo */
+        @media (max-width: 991px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -250px;
+                width: 250px;
+                height: 100%;
+                transition: left 0.3s ease;
+            }
+
+            .sidebar.open {
+                left: 0;
+            }
+
+            .container-fluid {
+                margin-left: 0;
+            }
+
+            .main-content {
+                margin-left: 0;
+                
+            }
+
+            .btn-sidebar-toggle {
+    position: relative;
+    /* Coloca o botão um pouco abaixo do topo da tela */
+    /* Coloca o botão fixo no lado esquerdo */
+    z-index: 1050; /* Garante que o botão fique acima da sidebar, mas abaixo de outros elementos */
+    display: block;
+  
+}
+
+            .btn-sidebar-toggle .fas {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-2 sidebar py-3" id="sidebar">
+                <div class="text-center mb-4">
+                    <img src="/src/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" height="68px">
+                </div>
+                <div class="nav flex-column">
+                    <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
+                    <a class="nav-link" href="#"><i class="fas fa-solar-panel me-2"></i> Painéis Solares</a>
+                    <a class="nav-link" href="#"><i class="fas fa-plug me-2"></i> Dispositivos</a>
+                    <a class="nav-link" href="#"><i class="fas fa-chart-line me-2"></i> Análises</a>
+                    <a class="nav-link" href="#"><i class="fas fa-graduation-cap me-2"></i> Cursos</a>
+                    <a class="nav-link" href="#"><i class="fas fa-cog me-2"></i> Configurações</a>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10 p-4 main-content">
+                <button class="btn btn-primary btn-sidebar-toggle d-md-none" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="gradient-text">Visão Geral</h2>
+                    <div class="btn-group">
+                        <button class="btn btn-primary"><i class="fas fa-download me-2"></i>Gerar Relatório</button>
+                    </div>
+                </div>
+
+                <!-- Metrics Cards -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card metric-card consumption h-100">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <div class="text-xs fw-bold text-primary text-uppercase mb-1">Consumo Diário</div>
+                                        <div class="h5 mb-0 fw-bold" id="consumptionValue">28.5 kWh</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-bolt fa-2x text-primary opacity-50"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card metric-card solar h-100">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <div class="text-xs fw-bold text-success text-uppercase mb-1">Geração Solar</div>
+                                        <div class="h5 mb-0 fw-bold" id="solarValue">12.8 kWh</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-solar-panel fa-2x text-success opacity-50"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card metric-card devices h-100">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <div class="text-xs fw-bold text-info text-uppercase mb-1">Dispositivos Ativos</div>
+                                        <div class="h5 mb-0 fw-bold" id="devicesValue">8</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-plug fa-2x text-info opacity-50"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card metric-card costs h-100">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <div class="text-xs fw-bold text-secondary text-uppercase mb-1">Custo Estimado</div>
+                                        <div class="h5 mb-0 fw-bold" id="costsValue">R$ 245,32</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-dollar-sign fa-2x text-secondary opacity-50"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="row">
+                    <!-- Energy Consumption Chart -->
+                    <div class="col-xl-8 col-lg-7">
+                        <div class="card chart-card">
+                            <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                                <h6 class="m-0 fw-bold gradient-text">Visão Geral do Consumo</h6>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        Esta Semana
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Esta Semana</a></li>
+                                        <li><a class="dropdown-item" href="#">Este Mês</a></li>
+                                        <li><a class="dropdown-item" href="#">Este Ano</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="energyChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Device Usage Chart -->
+                    <div class="col-xl-4 col-lg-5">
+                        <div class="card chart-card">
+                            <div class="card-header bg-white py-3">
+                                <h6 class="m-0 fw-bold gradient-text">Distribuição por Dispositivo</h6>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="deviceChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Devices Table -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header bg-white py-3">
+                                <h6 class="m-0 fw-bold gradient-text">Dispositivos Ativos</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Dispositivo</th>
+                                                <th>Local</th>
+                                                <th>Status</th>
+                                                <th>Consumo</th>
+                                                <th>Ações</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Smart TV</td>
+                                                <td>Sala</td>
+                                                <td><span class="badge bg-success">Ativo</span></td>
+                                                <td>120W</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary"><i class="fas fa-power-off"></i></button>
+                                                    <button class="btn btn-sm btn-info"><i class="fas fa-cog"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ar Condicionado</td>
+                                                <td>Quarto</td>
+                                                <td><span class="badge bg-success">Ativo</span></td>
+                                                <td>1200W</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary"><i class="fas fa-power-off"></i></button>
+                                                    <button class="btn btn-sm btn-info"><i class="fas fa-cog"></i></button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Máquina de Lavar</td>
+                                                <td>Lavanderia</td>
+                                                <td><span class="badge bg-secondary">Standby</span></td>
+                                                <td>5W</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary"><i class="fas fa-power-off"></i></button>
+                                                    <button class="btn btn-sm btn-info"><i class="fas fa-cog"></i></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+
+        // Energy Consumption Chart
+        const energyCtx = document.getElementById('energyChart').getContext('2d');
+        new Chart(energyCtx, {
+            type: 'line',
+            data: {
+                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                datasets: [{
+                    label: 'Consumo (kWh)',
+                    data: [25, 29, 28, 32, 27, 24, 28],
+                    backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                    borderColor: '#22c55e',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Geração Solar (kWh)',
+                    data: [12, 14, 13, 15, 11, 10, 13],
+                    backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                    borderColor: '#0ea5e9',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            borderDash: [2, 2]
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Device Usage Chart
+        const deviceCtx = document.getElementById('deviceChart').getContext('2d');
+        new Chart(deviceCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Ar Condicionado', 'Smart TV', 'Máquina de Lavar', 'Outros'],
+                datasets: [{
+                    data: [45, 25, 20, 10],
+                    backgroundColor: [
+                        '#22c55e',
+                        '#14b8a6',
+                        '#0ea5e9',
+                        '#94a3b8'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+
+        // Real-time updates simulation
+        function updateMetrics() {
+            const consumption = 25 + Math.random() * 5;
+            const solar = 10 + Math.random() * 4;
+            const devices = Math.floor(6 + Math.random() * 4);
+            const costs = 200 + Math.random() * 100;
+
+            document.getElementById('consumptionValue').textContent = `${consumption.toFixed(1)} kWh`;
+            document.getElementById('solarValue').textContent = `${solar.toFixed(1)} kWh`;
+            document.getElementById('devicesValue').textContent = devices;
+            document.getElementById('costsValue').textContent = `R$ ${costs.toFixed(2)}`;
+        }
+
+        // Update metrics every 5 seconds
+        setInterval(updateMetrics, 5000);
+        updateMetrics(); // Initial update
+
+        // Toggle Sidebar for Mobile Devices
+        document.getElementById('sidebarToggle').addEventListener('click', () => {
+            document.getElementById('sidebar').classList.toggle('open');
+        });
+    </script>
+</body>
+</html>
