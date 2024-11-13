@@ -5,101 +5,192 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Energize - Economia de Energia Inteligente</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .glass-nav {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #22c55e, #14b8a6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .card-hover {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+        }
+
+        .animated-bg {
+            background: linear-gradient(-45deg, #22c55e, #14b8a6, #0ea5e9, #22c55e);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #22c55e, #14b8a6);
+            z-index: 1000;
+            transition: width 0.2s ease-out;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translate(0, 0px); }
+            50% { transform: translate(0, 15px); }
+            100% { transform: translate(0, -0px); }
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <!-- Navegação -->
-    <nav class="bg-white shadow-lg">
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <img src="/src/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" class="h-8" style="height: 70px;">
+                    <img src="/src/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" class="h-8">
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#" class="text-gray-600 hover:text-green-500">Início</a>
-                    <a href="#" class="text-gray-600 hover:text-green-500">Sobre</a>
-                    <a href="#" class="text-gray-600 hover:text-green-500">Cursos</a>
-                    <a href="#" class="text-gray-600 hover:text-green-500">Dashboard</a>
-                    <a href="#" class="text-gray-600 hover:text-green-500">Contato</a>
-                    <a href="#" class="text-gray-600 hover:text-green-500">Acesso</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Início</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Sobre</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Cursos</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Dashboard</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Contato</a>
+                    <a href="#" class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-600 transition-colors duration-300">Acesso</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <div class="bg-gradient-to-r from-green-500 to-teal-400">
-        <div class="max-w-7xl mx-auto px-4 py-20">
+    <div class="animated-bg relative min-h-screen flex items-center">
+        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+        <div class="max-w-7xl mx-auto px-4 py-20 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div>
-                    <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
-                        Economia de energia ao alcance de todos
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                        O Futuro da <span class="gradient-text">Energia</span> está aqui
                     </h1>
-                    <p class="text-white text-xl mb-8">
-                        Transforme sua casa em um ambiente inteligente e economize energia com nossa solução IoT
+                    <p class="text-white text-xl mb-8 opacity-90">
+                        Transforme sua casa em um ambiente inteligente e economize energia com nossa solução IoT de ponta
                     </p>
                     <div class="space-x-4">
-                        <a href="#" class="bg-white text-green-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                        <a href="#" class="inline-block bg-white text-green-500 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-300 shadow-lg">
                             Começar Agora
                         </a>
-                        <a href="#" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-green-500 transition">
+                        <a href="#" class="inline-block border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-green-500 transition-all duration-300">
                             Saiba Mais
                         </a>
                     </div>
                 </div>
-                <div class="hidden md:block">
-                    <img src="/src/imgs/LogoEnergizePng-removebg-preview.png" alt="Dashboard IoT" class="rounded-lg shadow-xl">
+                <div class="hidden md:block" data-aos="fade-left" data-aos-duration="1000">
+                    <img src="/src/imgs/LogoEnergizePng-removebg-preview.png" alt="Dashboard IoT" class="floating rounded-2xl shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center card-hover" data-aos="fade-up" data-aos-delay="0">
+                    <div class="text-4xl font-bold gradient-text" id="statsUsers">0</div>
+                    <p class="text-gray-600">Usuários Ativos</p>
+                </div>
+                <div class="text-center card-hover" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl font-bold gradient-text" id="statsEnergy">0</div>
+                    <p class="text-gray-600">kWh Economizados</p>
+                </div>
+                <div class="text-center card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl font-bold gradient-text" id="statsCities">0</div>
+                    <p class="text-gray-600">Cidades Atendidas</p>
+                </div>
+                <div class="text-center card-hover" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl font-bold gradient-text" id="statsSaved">R$ 0</div>
+                    <p class="text-gray-600">Economia Gerada</p>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Features -->
-    <div class="py-20 bg-white">
+    <div class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-16">Por que escolher a Energize?</h2>
+            <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Por que escolher a Energize?</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center p-6">
-                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover" data-aos="zoom-in" data-aos-delay="0">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                         <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Monitoramento em Tempo Real</h3>
-                    <p class="text-gray-600">Acompanhe seu consumo de energia em tempo real através do nosso dashboard intuitivo</p>
+                    <h3 class="text-xl font-semibold mb-4 text-center">Monitoramento em Tempo Real</h3>
+                    <p class="text-gray-600 text-center">Acompanhe seu consumo de energia em tempo real através do nosso dashboard intuitivo e responsivo</p>
                 </div>
-                <div class="text-center p-6">
-                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover" data-aos="zoom-in" data-aos-delay="0">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                         <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Cursos Educativos</h3>
-                    <p class="text-gray-600">Aprenda a economizar energia com nossos cursos especializados</p>
+                    <h3 class="text-xl font-semibold mb-4 text-center">Cursos Educativos</h3>
+                    <p class="text-gray-600 text-center">Aprenda a economizar energia com nossos cursos especializados</p>
                 </div>
-                <div class="text-center p-6">
-                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover" data-aos="zoom-in" data-aos-delay="0">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                         <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Economia Garantida</h3>
-                    <p class="text-gray-600">Reduza sua conta de energia em até 30% com nossas soluções</p>
+                    <h3 class="text-xl font-semibold mb-4 text-center">Economia Garantida</h3>
+                    <p class="text-gray-600 text-center">Reduza sua conta de energia em até 30% com nossas soluções</p>
                 </div>
+                <!-- More features... -->
             </div>
         </div>
     </div>
 
-    <!-- CTA Section -->
-    <div class="bg-green-500">
-        <div class="max-w-7xl mx-auto px-4 py-16">
-            <div class="text-center">
-                <h2 class="text-3xl font-bold text-white mb-4">
+    <!-- CTA Section with Parallax -->
+    <div class="relative py-32 bg-fixed bg-center bg-cover" style="background-image: url('/api/placeholder/1920/1080')">
+        <div class="absolute inset-0 bg-green-500 bg-opacity-90"></div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-white mb-6">
                     Comece a economizar energia hoje mesmo
                 </h2>
-                <p class="text-white text-xl mb-8">
+                <p class="text-white text-xl mb-8 opacity-90">
                     Junte-se a milhares de famílias que já estão economizando com a Energize
                 </p>
-                <a href="#" class="bg-white text-green-500 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                <a href="#" class="inline-block bg-white text-green-500 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg">
                     Experimente Grátis
                 </a>
             </div>
@@ -163,28 +254,72 @@
         </div>
     </footer>
 
-    <!-- Dashboard Preview Modal -->
-    <div class="fixed inset-0 bg-black bg-opacity-50 hidden" id="dashboardModal">
-        <div class="flex items-center justify-center min-h-screen px-4">
-            <div class="bg-white rounded-lg max-w-4xl w-full p-8">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold">Dashboard Preview</h3>
-                    <button class="text-gray-500 hover:text-gray-700" onclick="document.getElementById('dashboardModal').classList.add('hidden')">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                        </svg>
-                    </button>
-                </div>
-                <img src="/api/placeholder/800/500" alt="Dashboard Preview" class="rounded-lg shadow-xl w-full">
-            </div>
-        </div>
-    </div>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/5511999999999" class="fixed bottom-8 right-8 bg-green-500 text-white rounded-full p-4 shadow-lg hover:bg-green-600 transition-colors">
-        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0c3.2.001 6.207 1.249 8.47 3.514 2.264 2.265 3.511 5.272 3.51 8.472-.001 6.554-5.336 11.891-11.891 11.891 0 0 .001 0 0 0h-.005c-1.986 0-3.934-.472-5.69-1.369L.057 24zm4.452-2.014l.242.145c1.521.904 3.277 1.383 5.063 1.383h.004c5.426 0 9.842-4.416 9.843-9.842.001-2.628-1.023-5.101-2.881-6.96-1.859-1.859-4.332-2.883-6.96-2.884-5.427 0-9.843 4.416-9.844 9.842 0 1.86.543 3.67 1.569 5.223l.244.387-.977 3.567 3.697-.961z"/>
-        </svg>
-    </a>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init();
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+
+        // Navbar Background Change on Scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('shadow-lg');
+            } else {
+                navbar.classList.remove('shadow-lg');
+            }
+        });
+
+        // Animated Stats
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            const range = end - start;
+            const minTimer = 50;
+            const stepTime = Math.abs(Math.floor(duration / range));
+            const startTime = new Date().getTime();
+            const endTime = startTime + duration;
+            let timer;
+
+            function run() {
+                const now = new Date().getTime();
+                const remaining = Math.max((endTime - now) / duration, 0);
+                const value = Math.round(end - (remaining * range));
+                if (id === 'statsSaved') {
+                    obj.textContent = `R$ ${value.toLocaleString()}`;
+                } else {
+                    obj.textContent = value.toLocaleString();
+                }
+                if (value === end) {
+                    clearInterval(timer);
+                }
+            }
+
+            timer = setInterval(run, stepTime);
+            run();
+        }
+
+        // Start animations when elements are in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateValue('statsUsers', 0, 50000, 2000);
+                    animateValue('statsEnergy', 0, 1000000, 2000);
+                    animateValue('statsCities', 0, 100, 2000);
+                    animateValue('statsSaved', 0, 1000000, 2000);
+                }
+            });
+        });
+
+        observer.observe(document.querySelector('#statsUsers'));
+    </script>
 </body>
 </html>
