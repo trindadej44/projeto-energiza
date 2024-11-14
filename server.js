@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const bcrypt = require('bcryptjs');
-
 const { Pool } = require('pg');
 const session = require('express-session');
 require('dotenv').config(); // Para carregar variáveis de ambiente do .env
@@ -29,8 +28,8 @@ const pool = new Pool({
   user: 'postgres',
   host: 'autorack.proxy.rlwy.net',
   database: 'railway',
-  password: 'FtIdQPRRMsIjVfFRfLZcLJhgtOXHgOrO',
-  port: 15456,
+  password: 'bwCWczHxLhLaKqCYeSztQIbEnToxBOwP',
+  port: 13264,
 });
 
 // Rota para cadastro de usuário (registro)
