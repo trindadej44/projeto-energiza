@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energize - Serviços Inteligentes</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="icon" href="/imgs/LogoEnergizePng-removebg-preview.png" type="image/png">
+    <style>
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .glass-nav {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #22c55e, #14b8a6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .card-hover {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+        }
+
+        .animated-bg {
+            background: linear-gradient(-45deg, #22c55e, #14b8a6, #0ea5e9, #22c55e);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #22c55e, #14b8a6);
+            z-index: 1000;
+            transition: width 0.2s ease-out;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translate(0, 0px); }
+            50% { transform: translate(0, 15px); }
+            100% { transform: translate(0, -0px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Navegação -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" class="h-8">
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Início</a>
+                    <a href="sobre.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Sobre</a>
+                    <a href="cursos.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Cursos</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Dashboard</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Consultoria</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Tutorial</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Suporte</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="animated-bg relative min-h-screen flex items-center">
+        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+        <div class="max-w-7xl mx-auto px-4 py-20 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div data-aos="fade-right" data-aos-duration="1000">
+                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                        Olá, <span id="username" data-username="Visitante">Visitante</span>!<br>Bem-vindo aos serviços da <span class="gradient-text">Energize</span>
+                    </h1>
+                    <p class="text-white text-xl mb-8 opacity-90">
+                        Explore nossas soluções personalizadas para tornar sua comunidade mais eficiente e sustentável
+                    </p>
+                    <div class="space-x-4">
+                        <div class="scroll-down" onclick="scrollToServices()">
+                            <svg class="w-8 h-8 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block" data-aos="fade-left" data-aos-duration="1000" >
+                    <img src="/imgs/MLHUl90.png" alt="Dashboard Energize" class="floating rounded-2xl shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Serviços -->
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Nossos Serviços</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover" data-aos="zoom-in" data-aos-delay="0">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3v-2m3 2h-6m0 0l3 1.5m-3-1.5h6" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-center">Dashboard</h3>
+                    <p class="text-gray-600 text-center">Monitoramento em tempo real do consumo de energia da sua comunidade</p>
+                    <a href="#" class="inline-block mt-4 bg-green-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-600 transition-colors duration-300">
+                        Acessar
+                    </a>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-center">Consultoria</h3>
+                    <p class="text-gray-600 text-center">Análise especializada para otimização do consumo de energia</p>
+                    <a href="#" class="inline-block mt-4 bg-green-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-600 transition-colors duration-300">
+                        Agendar
+                    </a>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-center">Tutorial</h3>
+                    <p class="text-gray-600 text-center">Aprenda a economizar energia com nossos guias passo a passo</p>
+                    <a href="#" class="inline-block mt-4 bg-green-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-600 transition-colors duration-300">
+                        Iniciar
+                    </a>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-center">Suporte</h3>
+                    <p class="text-gray-600 text-center">Tire suas dúvidas e obtenha ajuda especializada</p>
+                    <a href="#" class="inline-block mt-4 bg-green-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-600 transition-colors duration-300">
+                        Contatar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section with Parallax -->
+    <div class="relative py-32 bg-fixed bg-center bg-cover" style="background-image: url('/api/placeholder/1920/1080')">
+        <div class="absolute inset-0 bg-green-500 bg-opacity-90"></div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-white mb-6">
+                    Transforme sua comunidade com a Energize
+                </h2>
+                <p class="text-white text-xl mb-8 opacity-90">
+                    Junte-se a milhares de clientes que já estão economizando energia de forma inteligente
+                </p>
+                <a href="login.html" class="inline-block bg-white text-green-500 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg">
+                    Experimente Agora
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="/api/placeholder/150/50" alt="Energize Logo" class="h-8 mb-4">
+                    <p class="text-gray-400">Transformando o consumo de energia em comunidades</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Links Rápidos</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Início</a></li>
+                        <li><a href="sobre.html" class="text-gray-400 hover:text-white">Sobre</a></li>
+                        <li><a href="cursos.html" class="text-gray-400 hover:text-white">Cursos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Serviços</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contato</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400">contato@energize.com.br</li>
+                        <li class="text-gray-400">(11) 9999-9999</li>
+                        <li class="text-gray-400">São Paulo, SP</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Siga-nos</h3>
+                    <ul class="flex space-x-4">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Facebook</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Instagram</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Twitter</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bg-gray-800 py-4 text-center text-sm">
+            <p class="text-gray-400">© 2024 Energize. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', function() {
+            const scrollProgress = document.getElementById('scrollProgress');
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPosition = window.scrollY;
+            const scrollPercentage = (scrollPosition / docHeight) * 100;
+            scrollProgress.style.width = scrollPercentage + '%';
+        });
+        
+        document.addEventListener("DOMContentLoaded", function() {
+  // Fazendo uma requisição GET para a rota de perfil
+  fetch('/profile')
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Usuário não autenticado');
+      }
+    })
+    .then(data => {
+      // Atualiza o nome de usuário na página com base na resposta do backend
+      const usernameElement = document.getElementById('username');
+      const username = data.user.username;
+      usernameElement.textContent = username; // Exibe o nome de usuário
+    })
+    .catch(error => {
+      console.log(error);
+      // Caso o usuário não esteja logado, exibe "Visitante"
+      const usernameElement = document.getElementById('username');
+      usernameElement.textContent = 'Visitante';
+    });
+});
+
+
+    </script>
+    <script>
+        AOS.init();
+
+        // Scroll Progress Bar
+        // ... (existing scroll progress bar code) ...
+
+        function scrollToServices() {
+            const servicesSection = document.getElementById('services');
+            servicesSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // ... (existing profile fetching code) ...
+        });
+    </script>
+</body>
+</html>
