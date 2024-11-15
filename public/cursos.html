@@ -74,7 +74,6 @@
     <div class="mobile-menu-overlay" id="mobileMenuOverlay">
         <div class="mobile-menu-container" id="mobileMenu">
             <div class="mobile-menu-header">
-                <img src="/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" class="h-8">
                 <button class="mobile-menu-close" id="menuClose">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -141,14 +140,18 @@
                     <img src="/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" class="h-8">
                 </div>
                 <!-- Botão Hamburger -->
-                <button
-                    class="md:hidden text-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    id="menuToggle"
-                >
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
+                <div class="flex items-center md:hidden">
+                    <button
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
+                        id="menuToggle"
+                        aria-expanded="false"
+                    >
+                        <span class="sr-only">Abrir menu principal</span>
+                        <svg class="block h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
                 <!-- Links do Menu -->
                 <div
                     class="hidden md:flex items-center space-x-8"
@@ -161,15 +164,6 @@
                     <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Contato</a>
                     <a href="login.html" class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-600 transition-colors duration-300">Acesso</a>
                 </div>
-            </div>
-            <!-- Menu Mobile -->
-            <div class="hidden md:hidden" id="mobileMenu">
-                <a href="#" class="block py-2 text-gray-600 hover:text-green-500 transition-colors duration-300">Início</a>
-                <a href="sobre.html" class="block py-2 text-gray-600 hover:text-green-500 transition-colors duration-300">Sobre</a>
-                <a href="cursos.html" class="block py-2 text-gray-600 hover:text-green-500 transition-colors duration-300">Cursos</a>
-                <a href="#" class="block py-2 text-gray-600 hover:text-green-500 transition-colors duration-300">Dashboard</a>
-                <a href="#" class="block py-2 text-gray-600 hover:text-green-500 transition-colors duration-300">Contato</a>
-                <a href="login.html" class="block bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-600 transition-colors duration-300">Acesso</a>
             </div>
         </div>
     </nav>
