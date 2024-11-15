@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos - Energize</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        .glass-nav {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #22c55e, #14b8a6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .animated-bg {
+            background: linear-gradient(-45deg, #22c55e, #14b8a6, #0ea5e9, #22c55e);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card-hover {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #22c55e, #14b8a6);
+            z-index: 1000;
+            transition: width 0.2s ease-out;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Navegação -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" class="h-8">
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Início</a>
+                    <a href="sobre.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Sobre</a>
+                    <a href="#" class="text-green-500 font-medium">Cursos</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Dashboard</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Contato</a>
+                    <a href="login.html" class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-600 transition-colors duration-300">Acesso</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="animated-bg relative pt-32 pb-20">
+        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center" data-aos="fade-up">
+                <h1 class="text-5xl font-bold text-white mb-6">Cursos Energize</h1>
+                <p class="text-xl text-white opacity-90 max-w-2xl mx-auto">
+                    Desenvolva suas habilidades em gestão de energia e sustentabilidade
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Course -->
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold gradient-text" data-aos="fade-up">Curso em Destaque</h2>
+                <p class="text-gray-600 mt-4" data-aos="fade-up" data-aos-delay="100">Comece sua jornada com nosso curso mais popular</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="video-container rounded-xl overflow-hidden shadow-xl" data-aos="fade-right">
+                    <img src="https://i.imgur.com/c2vgGt1.png" alt="Curso Destaque" class="w-full">
+                </div>
+                <div data-aos="fade-left">
+                    <h3 class="text-3xl font-bold mb-4 gradient-text">Gestão Inteligente de Energia</h3>
+                    <p class="text-gray-600 mb-6">Aprenda a reduzir custos e otimizar o consumo de energia em residências e empresas com nossa metodologia exclusiva.</p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            40 horas de conteúdo
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Certificado reconhecido
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Suporte personalizado
+                        </li>
+                    </ul>
+                    <a href="#" class="inline-block bg-green-500 text-white px-8 py-3 rounded-full hover:bg-green-600 transition-colors duration-300">
+                        Começar Agora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Categorias de Cursos -->
+    <div class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 gradient-text" data-aos="fade-up">Categorias de Cursos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover" data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-center gradient-text">Eficiência Energética</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Fundamentos de Energia</li>
+                        <li>• Auditoria Energética</li>
+                        <li>• Tecnologias Eficientes</li>
+                        <li>• Gestão de Consumo</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-center gradient-text">Certificações</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• ISO 50001</li>
+                        <li>• Gestor de Energia</li>
+                        <li>• Auditor Energético</li>
+                        <li>• Consultor Especialista</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold mb-4 text-center gradient-text">Energia Renovável</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>• Energia Solar</li>
+                        <li>• Energia Eólica</li>
+                        <li>• Biomassa</li>
+                        <li>• Projetos Sustentáveis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Aulas Gratuitas -->
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16 gradient-text" data-aos="fade-up">Aulas Gratuitas</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg card-hover" data-aos="fade-up">
+                    <div class="video-container">
+                        <img src="/api/placeholder/400/225" alt="Aula 1" class="w-full">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Introdução à Eficiência Energética</h3>
+                        <p class="text-gray-600 mb-4">Aprenda os conceitos básicos e descubra como começar sua jornada.</p>
+                        <a href="#" class="text-green-500 hover:text-green-600 font-medium">Assistir Aula ›</a>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg card-hover" data-aos="fade-up" data-aos-delay="100">
+                    <div class="video-container">
+                        <img src="/api/placeholder/400/225" alt="Aula 2" class="w-full">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Energia Solar: Primeiros Passos</h3>
+                        <p class="text-gray-600 mb-4">Descubra o potencial da energia solar e como implementá-la.</p>
+                        <a href="#" class="text-green-500 hover:text-green-600 font-medium">Assistir Aula ›</a>
+                    </div>
+                </div>
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <div class="video-container">
+                        <img src="/api/placeholder/400/225" alt="Aula 3" class="w-full">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Gestão de Consumo Residencial</h3>
+                        <p class="text-gray-600 mb-                        4">Dicas para otimizar o consumo de energia na sua casa.</p>
+                        <a href="#" class="text-green-500 hover:text-green-600 font-medium">Assistir Aula ›</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Depoimentos -->
+<div class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-16 gradient-text" data-aos="fade-up">O que dizem nossos alunos</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-2xl shadow-lg card-hover" data-aos="fade-up">
+                <div class="flex items-center mb-4">
+                    <img src="/api/placeholder/50/50" alt="Depoimento 1" class="w-12 h-12 rounded-full mr-4">
+                    <div>
+                        <h3 class="text-lg font-medium">Maria Souza</h3>
+                        <p class="text-gray-600">Empresária</p>
+                    </div>
+                </div>
+                <p class="text-gray-600">"O curso da Energize me ajudou a reduzir os custos de energia em minha empresa. As aulas são muito práticas e o suporte da equipe é excelente!"</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-lg card-hover" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex items-center mb-4">
+                    <img src="/api/placeholder/50/50" alt="Depoimento 2" class="w-12 h-12 rounded-full mr-4">
+                    <div>
+                        <h3 class="text-lg font-medium">João Silva</h3>
+                        <p class="text-gray-600">Engenheiro</p>
+                    </div>
+                </div>
+                <p class="text-gray-600">"Recomendo o curso de Gestão Inteligente de Energia da Energize. O conteúdo é muito completo e foi fundamental para meu desenvolvimento profissional."</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-lg card-hover" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex items-center mb-4">
+                    <img src="/api/placeholder/50/50" alt="Depoimento 3" class="w-12 h-12 rounded-full mr-4">
+                    <div>
+                        <h3 class="text-lg font-medium">Ana Oliveira</h3>
+                        <p class="text-gray-600">Consultora de Sustentabilidade</p>
+                    </div>
+                </div>
+                <p class="text-gray-600">"Estou muito satisfeita com a qualidade dos cursos da Energize. O conteúdo é extremamente relevante e os instrutores são muito competentes."</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-10">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-400">
+            <img src="/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" class="h-10 mx-auto mb-4">
+            <p>© 2024 Energize. Todos os direitos reservados.</p>
+            <div class="mt-6 flex justify-center space-x-4">
+                <a href="#" class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.56v14.88A4.56 4.56 0 0119.44 24H4.56A4.56 4.56 0 010 19.44V4.56A4.56 4.56 0 014.56 0h14.88A4.56 4.56 0 0124 4.56zM9.8 19.2v-8H6.8v8h3zm-1.5-9.1a1.8 1.8 0 100-3.6 1.8 1.8 0 000 3.6zM20 19.2h-3v-4.2a2.1 2.1 0 00-4.2 0v4.2h-3v-8h3v1.4a3.5 3.5 0 016.2 2.6v4z"/></svg>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.46 6c-.77.34-1.6.57-2.46.67a4.27 4.27 0 001.89-2.37 8.51 8.51 0 01-2.7 1.03 4.24 4.24 0 00-7.23 3.86 12.07 12.07 0 01-8.77-4.45 4.24 4.24 0 001.31 5.66A4.2 4.2 0 012 11v.05a4.24 4.24 0 003.4 4.15 4.2 4.2 0 01-1.91.07 4.24 4.24 0 003.96 2.94A8.48 8.48 0 012 19.54a12 12 0 006.5 1.91c7.81 0 12.08-6.47 12.08-12.08 0-.18 0-.35-.01-.53A8.62 8.62 0 0024 4.57a8.5 8.5 0 01-2.54.7z"/></svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init();
+        const scrollProgress = document.getElementById('scrollProgress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-white', 'shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>
