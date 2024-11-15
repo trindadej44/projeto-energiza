@@ -168,6 +168,66 @@
     .shake {
       animation: shake 0.5s ease-in-out;
     }
+
+    .toast-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .toast {
+      background: var(--primary-green);
+      color: white;
+      padding: 16px 24px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      transform: translateY(100%);
+      transition: all 0.3s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast i {
+      font-size: 20px;
+    }
+
+    .toast-message {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Adicione animação de loading */
+    .toast-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .toast-progress::after {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: white;
+      transform-origin: left;
+      animation: progress 2s linear forwards;
+    }
+
+    @keyframes progress {
+      0% { transform: scaleX(1); }
+      100% { transform: scaleX(0); }
+    }
   </style>
 </head>
 <body>
@@ -203,25 +263,37 @@
     </div>
   </div>
 
+  <div class="toast-container">
+    <div class="toast">
+      <i class="fas fa-check-circle"></i>
+      <span class="toast-message">Login realizado com sucesso!</span>
+      <div class="toast-progress"></div>
+    </div>
+  </div>
+
   <script>
     const loginForm = document.getElementById('loginForm');
     const errorMessage = document.getElementById('errorMessage');
     const container = document.querySelector('.container');
+    const toast = document.querySelector('.toast');
+
+    function showToast() {
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+        // Redireciona após a animação do toast
+        window.location.href = 'dashboard.html';
+      }, 2000);
+    }
 
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
-
+      // const response = await fetch('https://projeto-energize.onrender.com/login', {
+      // const response = await fetch('http://localhost:3004/login', {
       try {
-        //MUDAR PARA https://projeto-energize.onrender.com SEMPRE QUE DER PUSH!
-        //MUDAR PARA https://projeto-energize.onrender.com SEMPRE QUE DER PUSH!
-        //MUDAR PARA https://projeto-energize.onrender.com SEMPRE QUE DER PUSH!
-        //MUDAR PARA https://projeto-energize.onrender.com SEMPRE QUE DER PUSH!
-        //MUDAR PARA https://projeto-energize.onrender.com SEMPRE QUE DER PUSH!
-        //MUDAR PARA https://projeto-energize.onrender.com SEMPRE QUE DER PUSH!
-        //http://localhost:3004/login
         const response = await fetch('https://projeto-energize.onrender.com/login', {
           method: 'POST',
           headers: {
@@ -233,14 +305,13 @@
         const data = await response.json();
 
         if (response.ok) {
-          // Animação de sucesso
+          // Armazena o token se necessário
+          localStorage.setItem('token', data.token);
+          
+          // Mostra o toast e redireciona
           container.style.boxShadow = '0 10px 25px rgba(76, 175, 80, 0.3)';
-          setTimeout(() => {
-            alert('Login bem-sucedido!');
-            console.log('Token:', data.token);
-          }, 500);
+          showToast();
         } else {
-          // Animação de erro
           errorMessage.textContent = data.message || 'Usuário ou senha incorretos';
           errorMessage.style.display = 'block';
           container.classList.add('shake');
