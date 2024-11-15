@@ -1,3 +1,16 @@
+/* Impede scroll horizontal */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Remove padding padrão em dispositivos móveis */
+body {
+    padding: 0;
+    margin: 0;
+}
+
 .mobile-menu-overlay {
     position: fixed;
     top: 0;
