@@ -8,6 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <link rel="icon" href="/imgs/LogoEnergizePng-removebg-preview.png" type="image/png">
     <link rel="stylesheet" type="text/css" href="mobile.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="carrousel.css" media="screen" />
     <style>
         .parallax {
             background-attachment: fixed;
@@ -109,7 +110,7 @@
                         Cursos
                     </div>
                 </a>
-                <a href="#" class="mobile-menu-item">
+                <a href="dashboard-info.html" class="mobile-menu-item">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
@@ -117,7 +118,7 @@
                         Dashboard
                     </div>
                 </a>
-                <a href="#" class="mobile-menu-item">
+                <a href="contato.html" class="mobile-menu-item">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -166,7 +167,6 @@
             </div>
         </div>
     </nav>
-    
 
     <!-- Hero Section -->
     <div class="animated-bg relative min-h-screen flex items-center">
@@ -190,12 +190,19 @@
                     </div>
                 </div>
                 <div class="hidden md:block" data-aos="fade-left" data-aos-duration="1000">
-                    <img src="/imgs/mockup-laptop.png" alt="Dashboard IoT" class="floating rounded-2xl shadow-2xl">
+                    <div class="carousel-container">
+                        <div class="carousel-track">
+                            <img src="/imgs/LogoEnergizePng-removebg-preview.png" alt="Dashboard IoT 1" class="carousel-slide">
+                            <img src="/imgs/promo-cursos-cell-2.3-removebg-preview.png" alt="Dashboard IoT 2" class="carousel-slide">
+                            <img src="/imgs/mockup-laptop.png" alt="Dashboard IoT 3" class="carousel-slide">
+                            <!-- Clone do primeiro slide para transição suave infinita -->
+                            <img src="/imgs/LogoEnergizePng-removebg-preview.png" alt="Dashboard IoT 1" class="carousel-slide">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Stats Section -->
     <div class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4">
@@ -336,6 +343,7 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="mobilejs.js"></script>
+    <script src="carrousel.js"></script>
     <script>
         // Initialize AOS
         AOS.init();

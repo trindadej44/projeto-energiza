@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Energize - Serviços Inteligentes</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="mobile.css" media="screen" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <link rel="icon" href="/imgs/LogoEnergizePng-removebg-preview.png" type="image/png">
     <style>
@@ -70,7 +71,70 @@
     </style>
 </head>
 <body class="bg-gray-50">
+
     <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Navegação -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="mobile-menu-container" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <button class="mobile-menu-close" id="menuClose">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <nav>
+                <a href="index.html" class="mobile-menu-item active">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        Início
+                    </div>
+                </a>
+                <a href="sobre.html" class="mobile-menu-item">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Sobre
+                    </div>
+                </a>
+                <a href="" class="mobile-menu-item">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        Cursos
+                    </div>
+                </a>
+                <a href="#" class="mobile-menu-item">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        Dashboard
+                    </div>
+                </a>
+                <a href="#" class="mobile-menu-item">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        Contato
+                    </div>
+                </a>
+            </nav>
+
+            <div class="mobile-menu-footer">
+                <a href="login.html" class="mobile-menu-cta">
+                    Acessar Plataforma
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- Navegação -->
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
@@ -79,45 +143,34 @@
                 <div class="flex items-center">
                     <img src="/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" class="h-8">
                 </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Início</a>
+                <!-- Botão Hamburger -->
+                <div class="flex items-center md:hidden">
+                    <button
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
+                        id="menuToggle"
+                        aria-expanded="false"
+                    >
+                        <span class="sr-only">Abrir menu principal</span>
+                        <svg class="block h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Links do Menu -->
+                <div
+                    class="hidden md:flex items-center space-x-8"
+                    id="menuLinks"
+                >
+                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Início</a>
                     <a href="sobre.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Sobre</a>
                     <a href="cursos.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Cursos</a>
                     <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Dashboard</a>
-                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Consultoria</a>
-                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Tutorial</a>
-                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Suporte</a>
+                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Contato</a>
+                    <a href="login.html" class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-600 transition-colors duration-300">Acesso</a>
                 </div>
             </div>
         </div>
     </nav>
-
-    <!-- Hero Section -->
-    <div class="animated-bg relative min-h-screen flex items-center">
-        <div class="absolute inset-0 bg-black bg-opacity-30"></div>
-        <div class="max-w-7xl mx-auto px-4 py-20 relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div data-aos="fade-right" data-aos-duration="1000">
-                    <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                        Olá, <span id="username" data-username="Visitante">Visitante</span>!<br>Bem-vindo aos serviços da <span class="gradient-text">Energize</span>
-                    </h1>
-                    <p class="text-white text-xl mb-8 opacity-90">
-                        Explore nossas soluções personalizadas para tornar sua comunidade mais eficiente e sustentável
-                    </p>
-                    <div class="space-x-4">
-                        <div class="scroll-down" onclick="scrollToServices()">
-                            <svg class="w-8 h-8 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="hidden md:block" data-aos="fade-left" data-aos-duration="1000" >
-                    <img src="/imgs/MLHUl90.png" alt="Dashboard Energize" class="floating rounded-2xl shadow-2xl">
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Serviços -->
     <div class="py-20 bg-white">
@@ -156,7 +209,7 @@
                     </div>
                     <h3 class="text-xl font-semibold mb-4 text-center">Tutorial</h3>
                     <p class="text-gray-600 text-center">Aprenda a economizar energia com nossos guias passo a passo</p>
-                    <a href="#" class="inline-block mt-4 bg-green-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-600 transition-colors duration-300">
+                    <a href="tutorial.html" class="inline-block mt-4 bg-green-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-green-600 transition-colors duration-300">
                         Iniciar
                     </a>
                 </div>
@@ -207,7 +260,7 @@
                     <ul class="space-y-2">
                         <li><a href="index.html" class="text-gray-400 hover:text-white">Início</a></li>
                         <li><a href="sobre.html" class="text-gray-400 hover:text-white">Sobre</a></li>
-                        <li><a href="cursos.html" class="text-gray-400 hover:text-white">Cursos</a></li>
+                        <li><a href="cursos-logado.html" class="text-gray-400 hover:text-white">Cursos</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white">Serviços</a></li>
                     </ul>
                 </div>
@@ -236,6 +289,7 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="mobilejs.js"></script>
     <script>
         AOS.init();
 
