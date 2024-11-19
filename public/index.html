@@ -86,7 +86,7 @@
             </div>
             
             <nav>
-                <a href="#" class="mobile-menu-item active">
+                <a href="index.html" class="mobile-menu-item active">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
@@ -141,7 +141,7 @@
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <img src="/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" class="h-8">
+                    <a href="index.html"><img src="/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" class="h-8" style="height: 70px;"></a>
                 </div>
                 <!-- Botão Hamburger -->
                 <button
@@ -157,11 +157,11 @@
                     class="hidden md:flex items-center space-x-8"
                     id="menuLinks"
                 >
-                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Início</a>
+                    <a href="index.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Início</a>
                     <a href="sobre.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Sobre</a>
                     <a href="cursos.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Cursos</a>
-                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Dashboard</a>
-                    <a href="#" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Contato</a>
+                    <a href="dashboard-info.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Dashboard</a>
+                    <a href="contato.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Contato</a>
                     <a href="login.html" class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-600 transition-colors duration-300">Acesso</a>
                 </div>
             </div>
@@ -275,7 +275,7 @@
                 <p class="text-white text-xl mb-8 opacity-90">
                     Junte-se a milhares de famílias que já estão economizando com a Energize
                 </p>
-                <a href="#" class="inline-block bg-white text-green-500 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg">
+                <a href="login.html" class="inline-block bg-white text-green-500 px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg">
                     Experimente Grátis
                 </a>
             </div>
@@ -293,10 +293,10 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Links Rápidos</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Início</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Sobre</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Cursos</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Dashboard</a></li>
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Início</a></li>
+                        <li><a href="sobre.html" class="text-gray-400 hover:text-white">Sobre</a></li>
+                        <li><a href="cursos.html" class="text-gray-400 hover:text-white">Cursos</a></li>
+                        <li><a href="dashboard-info.html" class="text-gray-400 hover:text-white">Dashboard</a></li>
                     </ul>
                 </div>
                 <div>
@@ -344,70 +344,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="mobilejs.js"></script>
     <script src="carrousel.js"></script>
-    <script>
-        // Initialize AOS
-        AOS.init();
-
-        // Scroll Progress Bar
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('scrollProgress').style.width = scrolled + '%';
-        });
-
-        // Navbar Background Change on Scroll
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('shadow-lg');
-            } else {
-                navbar.classList.remove('shadow-lg');
-            }
-        });
-
-        // Animated Stats
-        function animateValue(id, start, end, duration) {
-            const obj = document.getElementById(id);
-            const range = end - start;
-            const minTimer = 50;
-            const stepTime = Math.abs(Math.floor(duration / range));
-            const startTime = new Date().getTime();
-            const endTime = startTime + duration;
-            let timer;
-
-            function run() {
-                const now = new Date().getTime();
-                const remaining = Math.max((endTime - now) / duration, 0);
-                const value = Math.round(end - (remaining * range));
-                if (id === 'statsSaved') {
-                    obj.textContent = `R$ ${value.toLocaleString()}`;
-                } else {
-                    obj.textContent = value.toLocaleString();
-                }
-                if (value === end) {
-                    clearInterval(timer);
-                }
-            }
-
-            timer = setInterval(run, stepTime);
-            run();
-        }
-
-        // Start animations when elements are in view
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateValue('statsUsers', 0, 50000, 2000);
-                    animateValue('statsEnergy', 0, 1000000, 2000);
-                    animateValue('statsCities', 0, 100, 2000);
-                    animateValue('statsSaved', 0, 1000000, 2000);
-                }
-            });
-        });
-
-        observer.observe(document.querySelector('#statsUsers'));
-    </script>
+    <script src="navbar.js"></script>
     
 </body>
 </html>

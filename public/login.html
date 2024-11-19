@@ -6,6 +6,7 @@
   <title>Login - Energize</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link rel="icon" href="/imgs/LogoEnergizePng-removebg-preview.png" type="image/png">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
     :root {
       --primary-green: #4CAF50;
@@ -232,19 +233,19 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" data-aos="fade-up">
     <div class="logo-container">
       <i class="fas fa-leaf logo-icon"></i>
       <h2>Energize</h2>
     </div>
 
-    <form id="loginForm">
+    <form id="loginForm" data-aos="fade-up">
       <div class="input-group">
         <i class="fas fa-user"></i>
         <input type="text" id="username" placeholder="Usuário" required />
       </div>
       
-      <div class="input-group">
+      <div class="input-group" data-aos="fade-up">
         <i class="fas fa-lock"></i>
         <input type="password" id="password" placeholder="Senha" required />
       </div>
@@ -272,11 +273,14 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
     const loginForm = document.getElementById('loginForm');
     const errorMessage = document.getElementById('errorMessage');
     const container = document.querySelector('.container');
     const toast = document.querySelector('.toast');
+
+    AOS.init();
 
     function showToast() {
       toast.classList.add('show');
@@ -295,7 +299,7 @@
       // const response = await fetch('https://projeto-energize.onrender.com/login', {
       // const response = await fetch('http://localhost:3004/login', {
       try {
-        const response = await fetch('https://projeto-energize.onrender.com/login', {
+        const response = await fetch('http://localhost:3004/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

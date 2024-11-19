@@ -6,6 +6,7 @@
   <title>Cadastro - Energize</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <link rel="icon" href="/imgs/LogoEnergizePng-removebg-preview.png" type="image/png">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <style>
     :root {
       --primary-green: #4CAF50;
@@ -200,13 +201,13 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo-container">
+  <div class="container" data-aos="fade-up">
+    <div class="logo-container" data-aos="fade-up">
       <i class="fas fa-leaf logo-icon"></i>
       <h2>Cadastro Energize</h2>
     </div>
 
-    <form id="registerForm">
+    <form id="registerForm" data-aos="fade-up">
       <div class="input-group">
         <label class="input-label" for="username">Nome de Usuário</label>
         <i class="fas fa-user" style="padding-top: 20px;"></i>
@@ -240,7 +241,11 @@
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
+    
+    AOS.init();
+
     const registerForm = document.getElementById('registerForm');
     const messageElement = document.getElementById('message');
     const container = document.querySelector('.container');
