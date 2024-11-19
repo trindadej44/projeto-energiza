@@ -1,11 +1,281 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consultoria</title>
+    <title>Consultoria em Energia - Energize</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="icon" href="/imgs/LogoEnergizePng-removebg-preview.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="mobile.css" media="screen" />
+    <style>
+        .glass-nav {
+            backdrop-filter: blur(100px);
+            background-color: rgba(255, 255, 255, 0.315);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #22c55e, #14b8a6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .wave-background {
+            background: linear-gradient(-45deg, #22c55e, #14b8a6, #10b981, #059669);
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+        }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .energia-icon {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .energia-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+    </style>
 </head>
-<body>
-    <p>Em progresso!</p>
+<body class="bg-gray-50">
+    <!-- Navegação Moderna -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="mobile-menu-container" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <img src="/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" class="h-8">
+                <button class="mobile-menu-close" id="menuClose">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <nav>
+                <a href="index.html" class="mobile-menu-item active">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        Início
+                    </div>
+                </a>
+                <a href="sobre.html" class="mobile-menu-item">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Sobre
+                    </div>
+                </a>
+                <a href="cursos.html" class="mobile-menu-item">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        Cursos
+                    </div>
+                </a>
+                <a href="dashboard-info.html" class="mobile-menu-item">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        Dashboard
+                    </div>
+                </a>
+                <a href="contato.html" class="mobile-menu-item">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        Contato
+                    </div>
+                </a>
+            </nav>
+
+            <div class="mobile-menu-footer">
+                <a href="login.html" class="mobile-menu-cta">
+                    Acessar Plataforma
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegação -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html"><img src="/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" class="h-8" style="height: 70px;"></a>
+                </div>
+                <!-- Botão Hamburger -->
+                <button
+                    class="md:hidden text-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    id="menuToggle"
+                >
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+                <!-- Links do Menu -->
+                <div
+                    class="hidden md:flex items-center space-x-8"
+                    id="menuLinks"
+                >
+                    <a href="index.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Início</a>
+                    <a href="sobre.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Sobre</a>
+                    <a href="cursos.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Cursos</a>
+                    <a href="dashboard-info.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Dashboard</a>
+                    <a href="contato.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Contato</a>
+                    <a href="login.html" class="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-600 transition-colors duration-300">Acesso</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero da Consultoria com Animação -->
+    <div class="pt-24 pb-16 wave-background text-white">
+        <div class="max-w-7xl mx-auto px-4 text-center" data-aos="fade-up">
+            <h1 class="text-6xl font-bold mb-6 text-shadow">Consultoria em Eficiência Energética</h1>
+            <p class="text-2xl max-w-4xl mx-auto mb-10 leading-relaxed">
+                Transforme o consumo de energia da sua empresa com soluções inovadoras que reduzem custos, promovem sustentabilidade e impulsionam a performance empresarial.
+            </p>
+            <a href="#servicos" class="bg-white text-green-600 px-12 py-4 rounded-full font-bold hover:bg-gray-100 transition shadow-lg">
+                Descubra Nossos Serviços
+            </a>
+        </div>
+    </div>
+
+    <!-- Benefícios da Consultoria com Ícones Interativos -->
+    <section id="beneficios" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Benefícios Exclusivos</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center energia-icon">
+                    <svg class="w-20 h-20 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <h3 class="font-bold mb-3 text-xl">Economia Inteligente</h3>
+                    <p>Reduza até 40% dos gastos com estratégias de ponta em eficiência energética.</p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center energia-icon">
+                    <svg class="w-20 h-20 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <h3 class="font-bold mb-3 text-xl">Economia Inteligente</h3>
+                    <p>Reduza até 40% dos gastos com estratégias de ponta em eficiência energética.</p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center energia-icon">
+                    <svg class="w-20 h-20 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <h3 class="font-bold mb-3 text-xl">Economia Inteligente</h3>
+                    <p>Reduza até 40% dos gastos com estratégias de ponta em eficiência energética.</p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center energia-icon">
+                    <svg class="w-20 h-20 mx-auto text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <h3 class="font-bold mb-3 text-xl">Economia Inteligente</h3>
+                    <p>Reduza até 40% dos gastos com estratégias de ponta em eficiência energética.</p>
+                </div>
+                <!-- Outros ícones seguem o mesmo padrão -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços com Design Moderno -->
+    <section id="servicos" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Soluções Customizadas</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-md transform transition hover:scale-105 hover:shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-12 h-12 text-green-600 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <h3 class="text-2xl font-semibold text-green-600">Auditoria Energética Avançada</h3>
+                    </div>
+                    <p>Análise completa e detalhada do seu consumo, com tecnologias de ponta e inteligência artificial.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md transform transition hover:scale-105 hover:shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-12 h-12 text-green-600 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <h3 class="text-2xl font-semibold text-green-600">Auditoria Energética Avançada</h3>
+                    </div>
+                    <p>Análise completa e detalhada do seu consumo, com tecnologias de ponta e inteligência artificial.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md transform transition hover:scale-105 hover:shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-12 h-12 text-green-600 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <h3 class="text-2xl font-semibold text-green-600">Auditoria Energética Avançada</h3>
+                    </div>
+                    <p>Análise completa e detalhada do seu consumo, com tecnologias de ponta e inteligência artificial.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-md transform transition hover:scale-105 hover:shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <svg class="w-12 h-12 text-green-600 mr-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <h3 class="text-2xl font-semibold text-green-600">Auditoria Energética Avançada</h3>
+                    </div>
+                    <p>Análise completa e detalhada do seu consumo, com tecnologias de ponta e inteligência artificial.</p>
+                </div>
+                <!-- Outros serviços seguem o mesmo padrão -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Dinâmico -->
+    <section class="py-16 bg-gradient-to-r from-green-500 to-teal-400 text-white">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="bg-white/20 backdrop-blur-sm p-12 rounded-2xl">
+                <h2 class="text-5xl font-bold mb-6">Transforme Sua Energia, Transforme Seu Negócio</h2>
+                <p class="text-xl mb-8">Nossos especialistas estão prontos para elevar a eficiência energética da sua empresa a novos patamares.</p>
+                <a href="contato.html" class="bg-white text-green-600 px-12 py-4 rounded-full font-bold hover:bg-gray-100 transition shadow-lg inline-block">
+                    Agende Consultoria Gratuita
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Moderno -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-8">
+            <div>
+                <h4 class="text-2xl font-bold mb-4 gradient-text">Energize</h4>
+                <p>Soluções inteligentes de eficiência energética para transformar seu negócio.</p>
+            </div>
+            <div>
+                <h4 class="text-xl font-semibold mb-4">Links Rápidos</h4>
+                <nav class="space-y-2">
+                    <a href="#beneficios" class="block text-gray-300 hover:text-white">Benefícios</a>
+                    <a href="#servicos" class="block text-gray-300 hover:text-white">Serviços</a>
+                    <a href="contato.html" class="block text-gray-300 hover:text-white">Contato</a>
+                </nav>
+            </div>
+            <div>
+                <h4 class="text-xl font-semibold mb-4">Contate-nos</h4>
+                <p>📞 (11) 9999-9999</p>
+                <p>✉️ contato@energize.com.br</p>
+            </div>
+        </div>
+        <div class="text-center mt-8 border-t border-gray-700 pt-4">
+            © 2024 Energize Consultoria. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="mobilejs.js"></script>
+    <script src="navbar.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 </html>
