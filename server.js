@@ -112,11 +112,81 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, 'public', 'error-page.html'));
-});
+//app.use((req, res) => {
+  //res.status(404).sendFile(path.join(__dirname, 'public', 'error-page.html'));
+//});
 
 // Iniciar o servidor
 app.listen(3004, () => {
   console.log('Servidor rodando em http://localhost:3004');
+});
+
+function isAuthenticated(req, res, next) {
+  if (!req.session.user) {
+      return res.sendStatus(401); // Não autorizado
+  }
+  next();
+}
+
+app.get('/api/devices', async (req, res) => {
+    const userId = req.session.userId; // Obter o ID do usuário autenticado
+
+    if (!userId) {
+        return res.status(401).json({ error: 'Usuário não autenticado' });
+    }
+
+    try {
+        const result = await pool.query('SELECT * FROM devices WHERE user_id = $1', [userId]);
+        res.json(result.rows);
+    } catch (err) {
+        console.error('Erro ao buscar dispositivos:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+
+app.post('/api/devices', async (req, res) => {
+  const { name, consumption, status } = req.body;
+  const userId = req.session.userId; // Obtém o ID do usuário da sessão
+
+  if (!userId) {
+      return res.status(401).json({ error: 'Usuário não autenticado' });
+  }
+
+  try {
+      const result = await pool.query(
+          'INSERT INTO devices (name, consumption, status, user_id) VALUES ($1, $2, $3, $4) RETURNING *',
+          [name, consumption, status, userId]
+      );
+      res.status(201).json(result.rows[0]);
+  } catch (err) {
+      console.error('Erro no servidor:', err);
+      res.status(500).json({ error: err.message });
+  }
+});
+
+// Delete a device
+app.delete('/api/devices/:id', async (req, res) => {
+  const deviceId = req.params.id;
+  const userId = req.session.userId; // ID do usuário autenticado
+
+  if (!userId) {
+      return res.status(401).json({ error: 'Usuário não autenticado' });
+  }
+
+  try {
+      const result = await pool.query(
+          'DELETE FROM devices WHERE id = $1 AND user_id = $2 RETURNING *',
+          [deviceId, userId]
+      );
+
+      if (result.rowCount === 0) {
+          return res.status(404).json({ error: 'Dispositivo não encontrado' });
+      }
+
+      res.status(204).send(); // Retorna 204 sem corpo em caso de sucesso
+  } catch (err) {
+      console.error('Erro ao excluir dispositivo:', err);
+      res.status(500).json({ error: err.message });
+  }
 });
