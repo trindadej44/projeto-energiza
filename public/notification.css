@@ -1,0 +1,28 @@
+#notifications {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1050;
+    max-width: 300px;
+}
+
+.notification-enter {
+    opacity: 0;
+    transform: translateY(20px); /* Começa ligeiramente abaixo */
+}
+
+.notification-enter-active {
+    opacity: 1;
+    transform: translateY(0); /* Movimenta-se para sua posição */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.notification-exit {
+    opacity: 1;
+}
+
+.notification-exit-active {
+    opacity: 0;
+    transform: translateY(20px); /* Sai para baixo */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
