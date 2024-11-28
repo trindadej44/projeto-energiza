@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Painéis Solares - Energize</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.css" rel="stylesheet">
+</head>
+<body>
+    <style>
+        :root {
+            --primary-color: #22c55e;
+            --secondary-color: #14b8a6;
+            --bg-light: #f4f7fa;
+            --text-dark: #1f2937;
+            transition: color 0.1s ease-in-out;
+        }
+
+        * {
+            transition: all 0.1s ease;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            font-family: 'Inter', 'Arial', sans-serif;
+            color: var(--text-dark);
+            transition: color 0.1s ease-in-out;
+        }
+
+        .sidebar {
+            background: linear-gradient(-45deg, #22c55e, #14b8a6, #0ea5e9, #22c55e);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+            width: 250px;
+            transition: all 0.3s ease-in-out;
+            z-index: 2;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar .nav-link:hover {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .sidebar .nav-link.active {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            transition: all 0.3s ease-in-out;
+            margin-left: 250px;
+            /* Match sidebar width */
+        }
+
+        @media (max-width: 767.98px) {
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .dashboard-card {
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+
+        .device-card {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .device-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .device-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .search-filter {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-energize {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: white;
+            border-radius: 25px;
+        }
+
+        .stats-badge {
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--primary-color);
+            border-radius: 20px;
+            padding: 10px 15px;
+        }
+
+        .btn-sidebar-toggle {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 3;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-sidebar-toggle .fas {
+            font-size: 1.5rem;
+            transition: color 0.1s ease-in-out;
+        }
+
+        body.dark-mode {
+            background-color: #1f2937;
+            color: #f4f7fa;
+            transition: color 0.1s ease-in-out;
+        }
+
+        .dark-mode .dashboard-card {
+            background-color: #2d3748;
+            color: #f4f7fa;
+            transition: color 0.1s ease-in-out;
+        }
+
+        body,
+        .sidebar,
+        .dashboard-card {
+            transition: color 0.1s ease-in-out;
+            /* Transição rápida apenas para o texto */
+        }
+    </style>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar (from existing dashboard) -->
+            <div id="sidebar" class="col-md-2 sidebar d-none d-md-flex flex-column py-3">
+                <div class="text-center mb-4">
+                    <img src="/imgs/LogoEnergizePng-removebg-preview.png" style="height: 70px;">
+                </div>
+                <nav class="nav flex-column">
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="#" class="nav-link active">Painéis Solares</a>
+                    <a href="#" class="nav-link">Dispositivos</a>
+                    <a href="#" class="nav-link">Análises</a>
+                    <a href="#" class="nav-link">Cursos</a>
+                    <a href="#" class="nav-link">Configurações</a>
+                    <button id="toggleTheme" class="btn btn-secondary">🌙</button>
+                </nav>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-10 main-content">
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <h1>Painéis Solares</h1>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSolarPanelModal">
+                            Adicionar Painel Solar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="stats-badge d-flex align-items-center">
+                            <div>
+                                <small>Total de Painéis</small>
+                                <h4 id="totalPanels" class="mb-0">0</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stats-badge d-flex align-items-center">
+                            <div>
+                                <small>Energia Total Gerada</small>
+                                <h4 id="totalEnergyGenerated" class="mb-0">0 kWh</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stats-badge d-flex align-items-center">
+                            <div>
+                                <small>Capacidade Média</small>
+                                <h4 id="averageCapacity" class="mb-0">0 W</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <div class="dashboard-card p-3">
+                            <h4>Geração Mensal de Energia</h4>
+                            <canvas id="monthlyEnergyChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="dashboard-card p-3">
+                            <h4>Status dos Painéis</h4>
+                            <div id="panelStatusList"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="dashboard-card p-3">
+                            <h4>Lista de Painéis Solares</h4>
+                            <table class="table" id="solarPanelsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Capacidade</th>
+                                        <th>Energia Total</th>
+                                        <th>Status</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Adicionar Painel Solar -->
+    <div class="modal fade" id="addSolarPanelModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Adicionar Novo Painel Solar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addSolarPanelForm">
+                        <div class="mb-3">
+                            <label class="form-label">Nome do Painel</label>
+                            <input type="text" class="form-control" name="panel_name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Capacidade (Watts)</label>
+                            <input type="number" class="form-control" name="capacity_watts" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Data de Instalação</label>
+                            <input type="date" class="form-control" name="installation_date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Localização</label>
+                            <input type="text" class="form-control" name="location" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Adicionar Painel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Frontend JavaScript for Solar Panels
+        document.addEventListener('DOMContentLoaded', function() {
+            const fetchSolarPanels = async () => {
+                try {
+                    const response = await fetch('/api/solar-panels');
+                    const panels = await response.json();
+                    updatePanelsList(panels);
+                } catch (error) {
+                    console.error('Erro ao buscar painéis solares:', error);
+                }
+            };
+
+            const fetchPerformance = async () => {
+                try {
+                    const response = await fetch('/api/solar-panels/performance');
+                    const data = await response.json();
+                    updatePerformanceStats(data);
+                } catch (error) {
+                    console.error('Erro ao buscar desempenho:', error);
+                }
+            };
+
+            const updatePanelsList = (panels) => {
+                const tableBody = document.querySelector('#solarPanelsTable tbody');
+                tableBody.innerHTML = '';
+                document.getElementById('totalPanels').textContent = panels.length;
+
+                panels.forEach(panel => {
+                    const row = tableBody.insertRow();
+                    row.innerHTML = `
+                        <td>${panel.panel_name}</td>
+                        <td>${panel.capacity_watts} W</td>
+                        <td>${panel.total_energy_generated} kWh</td>
+                        <td>${panel.status}</td>
+                        <td>
+                            <button class="btn btn-sm btn-info">Detalhes</button>
+                            <button class="btn btn-sm btn-danger">Excluir</button>
+                        </td>
+                    `;
+                });
+            };
+
+            const updatePerformanceStats = (data) => {
+                const { performance, monthly_data } = data;
+                document.getElementById('totalEnergyGenerated').textContent = 
+                    `${performance.total_generated.toFixed(2)} kWh`;
+                document.getElementById('averageCapacity').textContent = 
+                    `${performance.average_output.toFixed(2)} W`;
+
+                // Render monthly energy chart
+                const ctx = document.getElementById('monthlyEnergyChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: monthly_data.map(item => `Mês ${item.month}`),
+                        datasets: [{
+                            label: 'Geração Mensal (kWh)',
+                            data: monthly_data.map(item => item.monthly_generation),
+                            backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                        }]
+                    }
+                });
+            };
+
+            document.getElementById('addSolarPanelForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                const data = Object.fromEntries(formData.entries());
+
+                try {
+                    const response = await fetch('/api/solar-panels', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    const newPanel = await response.json();
+                    fetchSolarPanels();
+                    fetchPerformance();
+                } catch (error) {
+                    console.error('Erro ao adicionar painel solar:', error);
+                }
+            });
+
+            fetchSolarPanels();
+            fetchPerformance();
+        });
+    </script>
+</body>
+</html>

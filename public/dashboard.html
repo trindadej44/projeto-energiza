@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,17 +37,25 @@
             transition: all 0.3s ease-in-out;
             z-index: 2;
             position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    overflow-y: auto;
-    box-sizing: border-box;
-        }  
+            top: 0;
+            left: 0;
+            bottom: 0;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
 
         @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .sidebar .nav-link {
@@ -70,27 +79,30 @@
             flex-grow: 1;
             padding: 20px;
             transition: all 0.3s ease-in-out;
-            margin-left: 250px; /* Match sidebar width */   
+            margin-left: 250px;
+            /* Match sidebar width */
         }
+
         @media (max-width: 767.98px) {
-    .main-content {
-        margin-left: 0;
-    }
-}
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
         .dashboard-card {
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             margin-bottom: 20px;
         }
 
         .device-card {
-            border: 1px solid rgba(0,0,0,0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .device-card:hover {
             transform: scale(1.03);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
         }
 
         .device-status {
@@ -103,7 +115,7 @@
         .search-filter {
             background: white;
             border-radius: 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
 
         .btn-energize {
@@ -136,32 +148,35 @@
             align-items: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         .btn-sidebar-toggle .fas {
-	        font-size: 1.5rem;
+            font-size: 1.5rem;
             transition: color 0.1s ease-in-out;
-	    }
+        }
 
         body.dark-mode {
-    background-color: #1f2937;
-    color: #f4f7fa;
-    transition: color 0.1s ease-in-out;
-}
+            background-color: #1f2937;
+            color: #f4f7fa;
+            transition: color 0.1s ease-in-out;
+        }
 
-.dark-mode .dashboard-card {
-    background-color: #2d3748;
-    color: #f4f7fa;
-    transition: color 0.1s ease-in-out;
-}
+        .dark-mode .dashboard-card {
+            background-color: #2d3748;
+            color: #f4f7fa;
+            transition: color 0.1s ease-in-out;
+        }
 
-body, .sidebar, .dashboard-card {
-    transition: color 0.1s ease-in-out; /* Transição rápida apenas para o texto */
-}
-
-
+        body,
+        .sidebar,
+        .dashboard-card {
+            transition: color 0.1s ease-in-out;
+            /* Transição rápida apenas para o texto */
+        }
     </style>
 </head>
+
 <body>
-    
+
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
@@ -173,7 +188,7 @@ body, .sidebar, .dashboard-card {
                 </div>
                 <div class="nav flex-column">
                     <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
-                    <a class="nav-link" href="#"><i class="fas fa-solar-panel me-2"></i> Painéis Solares</a>
+                    <a class="nav-link" href="solarpanel-dash.html"><i class="fas fa-solar-panel me-2"></i> Painéis Solares</a>
                     <a class="nav-link" href="#"><i class="fas fa-plug me-2"></i> Dispositivos</a>
                     <a class="nav-link" href="#"><i class="fas fa-chart-line me-2"></i> Análises</a>
                     <a class="nav-link" href="#"><i class="fas fa-graduation-cap me-2"></i> Cursos</a>
@@ -181,7 +196,7 @@ body, .sidebar, .dashboard-card {
                     <a id="toggleTheme" class="nav-link" class="btn btn-secondary">🌙</a>
                 </div>
             </div>
-        
+
             <!-- Botão de Toggle (somente para telas pequenas) -->
             <button class="btn btn-sidebar-toggle d-md-none p-3" id="toggleSidebar">
                 <i class="fas fa-bars"></i>
@@ -202,10 +217,10 @@ body, .sidebar, .dashboard-card {
                         <button id="exportDataBtn" class="btn btn-primary">
                             <i class="fas fa-file-export me-2"></i>Exportar Dispositivos
                         </button>
-                        
+
                     </div>
-                    
-                    
+
+
                 </div>
 
                 <!-- Quick Stats -->
@@ -322,7 +337,7 @@ body, .sidebar, .dashboard-card {
         document.addEventListener('DOMContentLoaded', () => {
             const sidebar = document.getElementById('sidebar');
             const toggleBtn = document.getElementById('toggleSidebar');
-    
+
             toggleBtn.addEventListener('click', () => {
                 sidebar.classList.toggle('d-none'); // Alterna visibilidade
                 sidebar.classList.toggle('d-flex');
@@ -333,51 +348,51 @@ body, .sidebar, .dashboard-card {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-        const deviceForm = document.getElementById('addDeviceForm');
-        const devicesTableBody = document.getElementById('devicesTableBody');
-        const totalDevicesElem = document.getElementById('totalDevices');
-        const totalConsumptionElem = document.getElementById('totalConsumption');
-        const activeDevicesElem = document.getElementById('activeDevices');
-        const deviceSearchInput = document.getElementById('deviceSearch');
-        const noDataRow = `<tr><td colspan="4" class="text-center text-muted">Nenhum dispositivo encontrado.</td></tr>`;
+        document.addEventListener('DOMContentLoaded', async () => {
+            const deviceForm = document.getElementById('addDeviceForm');
+            const devicesTableBody = document.getElementById('devicesTableBody');
+            const totalDevicesElem = document.getElementById('totalDevices');
+            const totalConsumptionElem = document.getElementById('totalConsumption');
+            const activeDevicesElem = document.getElementById('activeDevices');
+            const deviceSearchInput = document.getElementById('deviceSearch');
+            const noDataRow = `<tr><td colspan="4" class="text-center text-muted">Nenhum dispositivo encontrado.</td></tr>`;
 
-        let devices = [];
-        let energyStatusChart;
+            let devices = [];
+            let energyStatusChart;
 
-        async function fetchDevices() {
-            try {
-                const response = await fetch('/api/devices');
-                if (!response.ok) {
-                    throw new Error('Erro ao buscar dispositivos');
+            async function fetchDevices() {
+                try {
+                    const response = await fetch('/api/devices');
+                    if (!response.ok) {
+                        throw new Error('Erro ao buscar dispositivos');
+                    }
+                    devices = await response.json();
+                    renderDevices();
+                } catch (error) {
+                    console.error('Erro ao carregar dispositivos:', error);
                 }
-                devices = await response.json();
-                renderDevices();
-            } catch (error) {
-                console.error('Erro ao carregar dispositivos:', error);
             }
-        }
 
-        function renderDevices(filteredDevices = devices) {
-            devicesTableBody.innerHTML = '';
-            if (filteredDevices.length === 0) {
-            devicesTableBody.innerHTML = noDataRow;
-            totalDevicesElem.textContent = '0';
-            totalConsumptionElem.textContent = '0 kWh';
-            activeDevicesElem.textContent = '0';
-            return;
-        }
-            totalDevicesElem.textContent = filteredDevices.length;
-            
-            const totalConsumption = filteredDevices.reduce((sum, device) => sum + device.consumption, 0);
-            totalConsumptionElem.textContent = `${(totalConsumption / 1000).toFixed(2)} kWh`;
+            function renderDevices(filteredDevices = devices) {
+                devicesTableBody.innerHTML = '';
+                if (filteredDevices.length === 0) {
+                    devicesTableBody.innerHTML = noDataRow;
+                    totalDevicesElem.textContent = '0';
+                    totalConsumptionElem.textContent = '0 kWh';
+                    activeDevicesElem.textContent = '0';
+                    return;
+                }
+                totalDevicesElem.textContent = filteredDevices.length;
 
-            const activeDevices = filteredDevices.filter(d => d.status === 'Ativo').length;
-            activeDevicesElem.textContent = activeDevices;
+                const totalConsumption = filteredDevices.reduce((sum, device) => sum + device.consumption, 0);
+                totalConsumptionElem.textContent = `${(totalConsumption / 1000).toFixed(2)} kWh`;
 
-            filteredDevices.forEach((device, index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
+                const activeDevices = filteredDevices.filter(d => d.status === 'Ativo').length;
+                activeDevicesElem.textContent = activeDevices;
+
+                filteredDevices.forEach((device, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
                     <td>${device.name}</td>
                     <td>${device.consumption} W</td>
                     <td>
@@ -391,178 +406,185 @@ body, .sidebar, .dashboard-card {
                         </button>
                     </td>
                 `;
-                devicesTableBody.appendChild(row);
-            });
+                    devicesTableBody.appendChild(row);
+                });
 
-            updateEnergyStatusChart();
-        }
-
-        function updateEnergyStatusChart() {
-            const activeCount = devices.filter(d => d.status === 'Ativo').length;
-            const inactiveCount = devices.filter(d => d.status === 'Inativo').length;
-
-            if (energyStatusChart) {
-                energyStatusChart.destroy();
+                updateEnergyStatusChart();
             }
 
-            const ctx = document.getElementById('energyStatusChart').getContext('2d');
-            energyStatusChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['Ativos', 'Inativos'],
-                    datasets: [{
-                        data: [activeCount, inactiveCount],
-                        backgroundColor: ['#22c55e', '#ef4444']
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { position: 'bottom' }
+            function updateEnergyStatusChart() {
+                const activeCount = devices.filter(d => d.status === 'Ativo').length;
+                const inactiveCount = devices.filter(d => d.status === 'Inativo').length;
+
+                if (energyStatusChart) {
+                    energyStatusChart.destroy();
+                }
+
+                const ctx = document.getElementById('energyStatusChart').getContext('2d');
+                energyStatusChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Ativos', 'Inativos'],
+                        datasets: [{
+                            data: [activeCount, inactiveCount],
+                            backgroundColor: ['#22c55e', '#ef4444']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
                     }
-                }
-            });
-        }
-
-        deviceSearchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const filteredDevices = devices.filter(device => 
-                device.name.toLowerCase().includes(searchTerm)
-            );
-            renderDevices(filteredDevices);
-        });
-
-        await fetchDevices();
-
-        deviceForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const name = document.getElementById('deviceName').value;
-            const consumption = parseInt(document.getElementById('deviceConsumption').value);
-            const status = document.getElementById('deviceStatus').value;
-
-            const newDevice = { name, consumption, status };
-
-            try {
-                showNotification('Dispositivo adicionado com sucesso!', 'success');
-                const response = await fetch('/api/devices', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newDevice),
                 });
-
-                if (!response.ok) {
-                    throw new Error('Erro ao adicionar dispositivo');
-                }
-
-                const device = await response.json();
-                devices.push(device);
-                renderDevices();
-            } catch (error) {
-                console.error('Erro ao adicionar dispositivo:', error);
             }
 
-            deviceForm.reset();
-            const modal = bootstrap.Modal.getInstance(document.getElementById('addDeviceModal'));
-            modal.hide();
-        });
+            deviceSearchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const filteredDevices = devices.filter(device =>
+                    device.name.toLowerCase().includes(searchTerm)
+                );
+                renderDevices(filteredDevices);
+            });
 
-        window.removeDevice = async (index) => {
-            const deviceId = devices[index].id;
+            await fetchDevices();
 
-            try {
-                showNotification('Dipositivo removido com sucesso!', 'success');
-                const response = await fetch(`/api/devices/${deviceId}`, {
-                    method: 'DELETE',
-                });
+            deviceForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('deviceName').value;
+                const consumption = parseInt(document.getElementById('deviceConsumption').value);
+                const status = document.getElementById('deviceStatus').value;
 
-                if (!response.ok) {
-                    throw new Error('Erro ao excluir dispositivo');
+                const newDevice = {
+                    name,
+                    consumption,
+                    status
+                };
+
+                try {
+                    showNotification('Dispositivo adicionado com sucesso!', 'success');
+                    const response = await fetch('/api/devices', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(newDevice),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Erro ao adicionar dispositivo');
+                    }
+
+                    const device = await response.json();
+                    devices.push(device);
+                    renderDevices();
+                } catch (error) {
+                    console.error('Erro ao adicionar dispositivo:', error);
                 }
 
-                devices.splice(index, 1);
-                renderDevices();
-            } catch (error) {
-                console.error('Erro ao excluir dispositivo:', error);
-            }
-        };
-    });
-
-    document.addEventListener('DOMContentLoaded', async () => {
-    const forecastElem = document.getElementById('forecastConsumption');
-    const recommendationsElem = document.getElementById('consumptionRecommendations');
-
-    async function fetchConsumptionForecast() {
-        try {
-            const response = await fetch('/api/consumption-forecast');
-            if (!response.ok) throw new Error('Erro ao obter previsão de consumo.');
-
-            const data = await response.json();
-
-            forecastElem.textContent = `Estimativa para o próximo mês: ${data.forecast} kWh`;
-
-            recommendationsElem.innerHTML = '';
-            data.recommendations.forEach(rec => {
-                const li = document.createElement('li');
-                li.textContent = rec;
-                recommendationsElem.appendChild(li);
+                deviceForm.reset();
+                const modal = bootstrap.Modal.getInstance(document.getElementById('addDeviceModal'));
+                modal.hide();
             });
-        } catch (error) {
-            console.error('Erro ao carregar previsão de consumo:', error);
-            forecastElem.textContent = 'Não foi possível calcular a previsão.';
-        }
-    }
 
-    await fetchConsumptionForecast();
-});
+            window.removeDevice = async (index) => {
+                const deviceId = devices[index].id;
 
-function showNotification(message, type = 'success') {
-    const notif = document.createElement('div');
-    notif.className = `alert alert-${type} alert-dismissible fade show shadow notification-enter`;
-    notif.role = 'alert';
-    notif.innerHTML = `
+                try {
+                    showNotification('Dipositivo removido com sucesso!', 'success');
+                    const response = await fetch(`/api/devices/${deviceId}`, {
+                        method: 'DELETE',
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Erro ao excluir dispositivo');
+                    }
+
+                    devices.splice(index, 1);
+                    renderDevices();
+                } catch (error) {
+                    console.error('Erro ao excluir dispositivo:', error);
+                }
+            };
+        });
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const forecastElem = document.getElementById('forecastConsumption');
+            const recommendationsElem = document.getElementById('consumptionRecommendations');
+
+            async function fetchConsumptionForecast() {
+                try {
+                    const response = await fetch('/api/consumption-forecast');
+                    if (!response.ok) throw new Error('Erro ao obter previsão de consumo.');
+
+                    const data = await response.json();
+
+                    forecastElem.textContent = `Estimativa para o próximo mês: ${data.forecast} kWh`;
+
+                    recommendationsElem.innerHTML = '';
+                    data.recommendations.forEach(rec => {
+                        const li = document.createElement('li');
+                        li.textContent = rec;
+                        recommendationsElem.appendChild(li);
+                    });
+                } catch (error) {
+                    console.error('Erro ao carregar previsão de consumo:', error);
+                    forecastElem.textContent = 'Não foi possível calcular a previsão.';
+                }
+            }
+
+            await fetchConsumptionForecast();
+        });
+
+        function showNotification(message, type = 'success') {
+            const notif = document.createElement('div');
+            notif.className = `alert alert-${type} alert-dismissible fade show shadow notification-enter`;
+            notif.role = 'alert';
+            notif.innerHTML = `
         ${message}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     `;
-    
-    const notificationsContainer = document.getElementById('notifications');
-    notificationsContainer.appendChild(notif);
 
-    // Adiciona a classe de "active" para a animação de entrada
-    setTimeout(() => notif.classList.add('notification-enter-active'), 10);
+            const notificationsContainer = document.getElementById('notifications');
+            notificationsContainer.appendChild(notif);
 
-    // Remove a notificação após 5 segundos com animação de saída
-    setTimeout(() => {
-        notif.classList.remove('notification-enter-active');
-        notif.classList.add('notification-exit-active');
+            // Adiciona a classe de "active" para a animação de entrada
+            setTimeout(() => notif.classList.add('notification-enter-active'), 10);
 
-        // Remove do DOM após a animação de saída
-        notif.addEventListener('transitionend', () => notif.remove());
-    }, 5000);
-}
+            // Remove a notificação após 5 segundos com animação de saída
+            setTimeout(() => {
+                notif.classList.remove('notification-enter-active');
+                notif.classList.add('notification-exit-active');
 
-//showNotification('Dispositivo adicionado com sucesso!', 'success');
-//showNotification('Erro ao carregar dispositivos!', 'danger');
+                // Remove do DOM após a animação de saída
+                notif.addEventListener('transitionend', () => notif.remove());
+            }, 5000);
+        }
 
-
-document.getElementById('exportDataBtn').addEventListener('click', async () => {
-    try {
-        const response = await fetch('/api/export-devices');
-        if (!response.ok) throw new Error('Erro ao exportar dispositivos.');
-
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'devices.csv';
-        a.click();
-        window.URL.revokeObjectURL(url);
-    } catch (err) {
-        console.error('Erro na exportação:', err);
-        alert('Erro ao exportar os dispositivos. Tente novamente.');
-    }
-});
+        //showNotification('Dispositivo adicionado com sucesso!', 'success');
+        //showNotification('Erro ao carregar dispositivos!', 'danger');
 
 
+        document.getElementById('exportDataBtn').addEventListener('click', async () => {
+            try {
+                const response = await fetch('/api/export-devices');
+                if (!response.ok) throw new Error('Erro ao exportar dispositivos.');
+
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'devices.csv';
+                a.click();
+                window.URL.revokeObjectURL(url);
+            } catch (err) {
+                console.error('Erro na exportação:', err);
+                alert('Erro ao exportar os dispositivos. Tente novamente.');
+            }
+        });
     </script>
 </body>
+
 </html>

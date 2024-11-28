@@ -364,5 +364,88 @@ function checkAuthentication(req, res, next) {
   next();
 }
 
+app.get('/api/solar-panels', async (req, res) => {
+  const userId = req.session.userId;
+  if (!userId) {
+      return res.status(401).json({ error: 'Usuário não autenticado' });
+  }
+
+  try {
+      const result = await pool.query(`
+          SELECT 
+              id, panel_name, capacity_watts, 
+              installation_date, total_energy_generated, 
+              current_output, status, location 
+          FROM solar_panels 
+          WHERE user_id = $1
+      `, [userId]);
+
+      res.json(result.rows);
+  } catch (err) {
+      console.error('Erro ao buscar painéis solares:', err);
+      res.status(500).json({ error: 'Erro ao buscar painéis solares' });
+  }
+});
+
+app.post('/api/solar-panels', async (req, res) => {
+  const { panel_name, capacity_watts, installation_date, location } = req.body;
+  const userId = req.session.userId;
+
+  if (!userId) {
+      return res.status(401).json({ error: 'Usuário não autenticado' });
+  }
+
+  try {
+      const result = await pool.query(`
+          INSERT INTO solar_panels 
+          (user_id, panel_name, capacity_watts, installation_date, location) 
+          VALUES ($1, $2, $3, $4, $5) 
+          RETURNING *
+      `, [userId, panel_name, capacity_watts, installation_date, location]);
+
+      res.status(201).json(result.rows[0]);
+  } catch (err) {
+      console.error('Erro ao adicionar painel solar:', err);
+      res.status(500).json({ error: 'Erro ao adicionar painel solar' });
+  }
+});
+
+app.get('/api/solar-panels/performance', async (req, res) => {
+  const userId = req.session.userId;
+  if (!userId) {
+      return res.status(401).json({ error: 'Usuário não autenticado' });
+  }
+
+  try {
+      const performanceResult = await pool.query(`
+          SELECT 
+              SUM(total_energy_generated) as total_generated,
+              AVG(current_output) as average_output,
+              COUNT(*) as total_panels
+          FROM solar_panels
+          WHERE user_id = $1
+      `, [userId]);
+
+      const monthlyResult = await pool.query(`
+          SELECT 
+              EXTRACT(MONTH FROM date) as month, 
+              SUM(energy_generated) as monthly_generation 
+          FROM solar_energy_logs 
+          JOIN solar_panels ON solar_energy_logs.solar_panel_id = solar_panels.id
+          WHERE user_id = $1
+          GROUP BY month
+          ORDER BY month
+      `, [userId]);
+
+      res.json({
+          performance: performanceResult.rows[0],
+          monthly_data: monthlyResult.rows
+      });
+  } catch (err) {
+      console.error('Erro ao buscar desempenho dos painéis solares:', err);
+      res.status(500).json({ error: 'Erro ao buscar desempenho' });
+  }
+});
+
 app.use(['/api/devices', '/api/consumption-forecast'], checkAuthentication);
 
