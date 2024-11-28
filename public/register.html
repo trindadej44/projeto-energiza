@@ -32,6 +32,67 @@
       align-items: center;
       padding: 20px;
     }
+    .input-group .fa-user {       
+  position: absolute;       
+  left: 15px;       
+  top: 50%;       
+  transform: translateY(-50%);       
+  color: #666;       
+  z-index: 5;       
+}
+
+.input-group input {       
+  width: 100%;       
+  padding: 15px 15px 15px 45px;     
+  border: 2px solid #eee;       
+  border-radius: 10px;       
+  font-size: 16px;       
+  transition: var(--transition);       
+}
+
+.input-group input:focus {       
+  border-color: var(--primary-green);       
+  outline: none;       
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);       
+}
+    .input-group {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .input-group .fa-lock {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      z-index: 5;
+    }
+    .password-toggle {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 15px 15px 15px 45px;
+      border: 2px solid #eee;
+      border-radius: 10px;
+      font-size: 16px;
+      transition: var(--transition);
+    }
+
+    .input-group input:focus {
+      border-color: var(--primary-green);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    }
+
+
 
     .container {
       width: 100%;
@@ -78,37 +139,7 @@
       margin-bottom: 25px;
     }
 
-    .input-group i {
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #666;
-    }
-
-    .input-label {
-      display: block;
-      margin-bottom: 8px;
-      color: #555;
-      font-size: 14px;
-      font-weight: 500;
-      margin-left: 5px;
-    }
-
-    .input-group input {
-      width: 100%;
-      padding: 15px 15px 15px 45px;
-      border: 2px solid #eee;
-      border-radius: 10px;
-      font-size: 16px;
-      transition: var(--transition);
-    }
-
-    .input-group input:focus {
-      border-color: var(--primary-green);
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
-    }
+    
 
     .password-requirements {
       font-size: 12px;
@@ -142,6 +173,7 @@
     button:active {
       transform: translateY(0);
     }
+   
 
     #message {
       margin-top: 20px;
@@ -151,6 +183,7 @@
       font-size: 14px;
       display: none;
     }
+    
 
     .message-success {
       background: var(--light-green);
@@ -188,6 +221,7 @@
       background: var(--light-green);
       border-radius: 8px;
     }
+    
 
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
@@ -218,11 +252,13 @@
         <label class="input-label" for="password">Senha</label>
         <i class="fas fa-lock"></i>
         <input type="password" id="password" name="password" required minlength="6" />
+        <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+        
         <div class="password-requirements">
           Mínimo de 6 caracteres
         </div>
       </div>
-
+      
       <button type="submit">
         <i class="fas fa-user-plus"></i>
         Criar Conta
@@ -247,58 +283,74 @@
     
     AOS.init();
 
-    const registerForm = document.getElementById('registerForm');
-    const messageElement = document.getElementById('message');
-    const container = document.querySelector('.container');
+const registerForm = document.getElementById('registerForm');
+const messageElement = document.getElementById('message');
+const container = document.querySelector('.container');
+const passwordInput = document.getElementById('password');
+const togglePasswordIcon = document.getElementById('togglePassword');
 
-    function showMessage(text, type) {
-      messageElement.textContent = text;
-      messageElement.style.display = 'block';
-      messageElement.className = type === 'success' ? 'message-success' : 'message-error';
+// Função para exibir mensagens de sucesso ou erro
+function showMessage(text, type) {
+  messageElement.textContent = text;
+  messageElement.style.display = 'block';
+  messageElement.className = type === 'success' ? 'message-success' : 'message-error';
+}
+
+
+registerForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  try {
+    const response = await fetch('/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password })
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      showMessage(result.message, 'success');
+      container.style.boxShadow = '0 10px 25px rgba(76, 175, 80, 0.3)';
+      
+      // Redirecionar para a página de login após 2 segundos
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 2000);
+    } else {
+      showMessage(result.message, 'error');
+      container.classList.add('shake');
+      setTimeout(() => container.classList.remove('shake'), 500);
     }
+  } catch (error) {
+    showMessage('Erro ao conectar com o servidor', 'error');
+  }
+});
 
-    registerForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+// Limpar mensagem quando o usuário começa a digitar
+document.querySelectorAll('input').forEach(input => {
+  input.addEventListener('input', () => {
+    messageElement.style.display = 'none';
+    container.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
+  });
+});
 
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-
-      try {
-        const response = await fetch('/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username, password })
-        });
-
-        const result = await response.json();
-
-        if (response.ok) {
-          showMessage(result.message, 'success');
-          container.style.boxShadow = '0 10px 25px rgba(76, 175, 80, 0.3)';
-          
-          // Redirect to login page after 2 seconds
-          setTimeout(() => {
-            window.location.href = 'login.html';
-          }, 2000);
-        } else {
-          showMessage(result.message, 'error');
-          container.classList.add('shake');
-          setTimeout(() => container.classList.remove('shake'), 500);
-        }
-      } catch (error) {
-        showMessage('Erro ao conectar com o servidor', 'error');
-      }
-    });
-
-    // Limpa mensagem quando o usuário começa a digitar
-    document.querySelectorAll('input').forEach(input => {
-      input.addEventListener('input', () => {
-        messageElement.style.display = 'none';
-        container.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.1)';
-      });
-    });
+// Alternar visibilidade da senha
+togglePasswordIcon.addEventListener('click', function () {
+  const isPasswordVisible = passwordInput.getAttribute('type') === 'text';
+  
+  // Alternar entre os tipos de entrada (text/password)
+  passwordInput.setAttribute('type', isPasswordVisible ? 'password' : 'text');
+  
+  // Alternar os ícones
+  this.classList.toggle('fa-eye-slash', !isPasswordVisible);
+  this.classList.toggle('fa-eye', isPasswordVisible);
+});
   </script>
 </body>
 </html>
