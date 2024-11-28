@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energize - Dashboard Info</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="icon" href="/imgs/LogoEnergizePng-removebg-preview.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="mobile.css" media="screen" />
+    <style>
+        .glass-nav {
+            backdrop-filter: blur(100px);
+            background-color: rgba(255, 255, 255, 0.315);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #22c55e, #14b8a6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .dashboard-mockup {
+            perspective: 1000px;
+        }
+
+        .dashboard-mockup img {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .dashboard-mockup:hover img {
+            transform: rotateY(-20deg) scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+        <div class="mobile-menu-container" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <img src="/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" class="h-8">
+                <button class="mobile-menu-close" id="menuClose">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <nav>
+                <a href="welcome.html" class="mobile-menu-item">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        Início
+                    </div>
+                </a>
+                <a href="sobre-logado.html" class="mobile-menu-item">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Sobre
+                    </div>
+                </a>
+                <a href="cursos-logado.html" class="mobile-menu-item">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        Cursos
+                    </div>
+                </a>
+                <a href="dashboard-info.html" class="mobile-menu-item active">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        Dashboard
+                    </div>
+                </a>
+                <a href="contato-logado.html" class="mobile-menu-item">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        Contato
+                    </div>
+                </a>
+            </nav>
+
+            <div class="mobile-menu-footer">
+                <a href="dashboard.html" class="mobile-menu-cta">
+                    Acessar Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegação -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="welcome.html"><img src="/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" class="h-8" style="height: 70px;"></a>
+                </div>
+                <!-- Botão Hamburger -->
+                <button
+                    class="md:hidden text-gray-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    id="menuToggle"
+                >
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+                <!-- Links do Menu -->
+                <div
+                    class="hidden md:flex items-center space-x-8"
+                    id="menuLinks"
+                >
+                    <a href="welcome.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Início</a>
+                    <a href="sobre-logado.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Sobre</a>
+                    <a href="cursos-logado.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Cursos</a>
+                    <a href="dashboard.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Dashboard</a>
+                    <a href="contato-logado.html" class="text-gray-600 hover:text-green-500 transition-colors duration-300">Contato</a>
+                 </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <div class="pt-24 pb-16 bg-gradient-to-r from-green-500 to-blue-700">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-5xl font-bold text-white mb-6" data-aos="fade-up">
+                Seu Dashboard <span class="gradient-text">Energizado</span>
+            </h1>
+            <p class="text-xl text-white max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                Uma ferramenta completa para monitorar, analisar e otimizar seu consumo de energia em tempo real
+            </p>
+        </div>
+    </div>
+
+    <!-- Dashboard Preview -->
+    <div class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+            <div class="dashboard-mockup" data-aos="fade-right">
+                <img src="/imgs/mockup-laptop.png" alt="Dashboard Preview" class="rounded-xl shadow-2xl">
+            </div>
+            <div data-aos="fade-left">
+                <h2 class="text-3xl font-bold mb-6 gradient-text">Visão Geral Completa</h2>
+                <p class="text-gray-600 mb-6">
+                    Nosso dashboard intuitivo oferece insights detalhados sobre seu consumo de energia, com gráficos em tempo real, análises comparativas e recomendações personalizadas.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>Consumo em tempo real</span>
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h16M3 8h16" />
+                        </svg>
+                        <span>Análises históricas</span>
+                    </div>
+                    <div class="flex items-center">
+                        <svg class="w-6 h-6 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        <span>Sugestões de economia</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text" data-aos="fade-up">
+                Recursos do Dashboard
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg feature-card" data-aos="zoom-in">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Relatórios Detalhados</h3>
+                    <p class="text-gray-600">
+                        Gere relatórios personalizados com análises profundas do seu consumo de energia.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg feature-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Alertas em Tempo Real</h3>
+                    <p class="text-gray-600">
+                        Receba notificações instantâneas sobre picos de consumo e possíveis economias.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg feature-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Comunidade Energize</h3>
+                    <p class="text-gray-600">
+                        Compare seu consumo com outros usuários e participe de desafios de economia.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Requirements -->
+    <div class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text" data-aos="fade-up">
+                Requisitos para Uso
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-8 rounded-xl" data-aos="fade-right">
+                    <h3 class="text-2xl font-semibold mb-6">Hardware Necessário</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Medidor inteligente Energize
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Conexão Wi-Fi estável
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Smartphone ou computador
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl" data-aos="fade-left">
+                    <h3 class="text-2xl font-semibold mb-6">Requisitos de Software</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Navegador moderno (Chrome, Firefox, Safari)
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            App Energize (iOS/Android)
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Última versão do sistema operacional
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="py-16 bg-gradient-to-r from-green-500 to-blue-700">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold text-white mb-6" data-aos="fade-up">
+                Pronto para Começar?
+            </h2>
+            <p class="text-xl text-white mb-8" data-aos="fade-up" data-aos-delay="200">
+                Transforme sua forma de consumir energia com o Dashboard Energize
+            </p>
+            <a href="login.html" class="inline-block bg-white text-green-600 font-bold py-3 px-8 rounded-full hover:bg-green-50 transition duration-300 shadow-lg" data-aos="zoom-in">
+                Começar Agora
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-xl font-bold mb-4">Energize</h3>
+                <p class="text-gray-400">Revolucionando o consumo de energia inteligente</p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4">Links Úteis</h4>
+                <ul class="space-y-2">
+                    <li><a href="sobre-logado.html" class="text-gray-300 hover:text-white">Sobre</a></li>
+                    <li><a href="contato-logado.html" class="text-gray-300 hover:text-white">Contato</a></li>
+                    <li><a href="suporte.html" class="text-gray-300 hover:text-white">Suporte</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4">Contato</h4>
+                <p class="text-gray-300">Email: suporte@energize.com</p>
+                <p class="text-gray-300">Telefone: 0800-ENERGIA</p>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-8 pt-6 text-center">
+            <p class="text-gray-500">&copy; 2024 Energize. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="mobilejs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+    </script>
+    <script src="navbar.js"></script>
+</body>
+</html>
