@@ -447,5 +447,46 @@ app.get('/api/solar-panels/performance', async (req, res) => {
   }
 });
 
+// Add this to the existing server.js file
+app.get('/api/energy-timeline', async (req, res) => {
+    const userId = req.session.userId;
+    if (!userId) {
+      return res.status(401).json({ error: 'Usuário não autenticado' });
+    }
+  
+    try {
+      // Fetch daily energy consumption
+      const dailyConsumption = await pool.query(`
+        SELECT 
+          date, 
+          SUM(consumption) as total_consumption
+        FROM device_consumption
+        WHERE user_id = $1
+        GROUP BY date
+        ORDER BY date DESC
+        LIMIT 30
+      `, [userId]);
+  
+      // Fetch device-wise consumption
+      const deviceConsumption = await pool.query(`
+        SELECT 
+          d.name, 
+          SUM(dc.consumption) as total_consumption
+        FROM devices d
+        JOIN device_consumption dc ON d.id = dc.device_id
+        WHERE d.user_id = $1
+        GROUP BY d.name
+      `, [userId]);
+  
+      res.json({
+        daily_consumption: dailyConsumption.rows,
+        device_breakdown: deviceConsumption.rows
+      });
+    } catch (err) {
+      console.error('Erro ao buscar timeline de energia:', err);
+      res.status(500).json({ error: 'Erro ao buscar dados de energia' });
+    }
+  });
+
 app.use(['/api/devices', '/api/consumption-forecast'], checkAuthentication);
 
