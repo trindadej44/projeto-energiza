@@ -364,29 +364,6 @@ function checkAuthentication(req, res, next) {
   next();
 }
 
-app.get('/api/solar-panels', async (req, res) => {
-  const userId = req.session.userId;
-  if (!userId) {
-      return res.status(401).json({ error: 'Usuário não autenticado' });
-  }
-
-  try {
-      const result = await pool.query(`
-          SELECT 
-              id, panel_name, capacity_watts, 
-              installation_date, total_energy_generated, 
-              current_output, status, location 
-          FROM solar_panels 
-          WHERE user_id = $1
-      `, [userId]);
-
-      res.json(result.rows);
-  } catch (err) {
-      console.error('Erro ao buscar painéis solares:', err);
-      res.status(500).json({ error: 'Erro ao buscar painéis solares' });
-  }
-});
-
 app.post('/api/solar-panels', async (req, res) => {
   const { panel_name, capacity_watts, installation_date, location } = req.body;
   const userId = req.session.userId;
@@ -397,10 +374,8 @@ app.post('/api/solar-panels', async (req, res) => {
 
   try {
       const result = await pool.query(`
-          INSERT INTO solar_panels 
-          (user_id, panel_name, capacity_watts, installation_date, location) 
-          VALUES ($1, $2, $3, $4, $5) 
-          RETURNING *
+          INSERT INTO solar_panels (user_id, panel_name, capacity_watts, installation_date, location)
+          VALUES ($1, $2, $3, $4, $5) RETURNING *
       `, [userId, panel_name, capacity_watts, installation_date, location]);
 
       res.status(201).json(result.rows[0]);
@@ -410,40 +385,77 @@ app.post('/api/solar-panels', async (req, res) => {
   }
 });
 
-app.get('/api/solar-panels/performance', async (req, res) => {
+// Rota para listar os painéis solares
+app.get('/api/solar-panels', async (req, res) => {
   const userId = req.session.userId;
+
   if (!userId) {
       return res.status(401).json({ error: 'Usuário não autenticado' });
   }
 
   try {
-      const performanceResult = await pool.query(`
-          SELECT 
-              SUM(total_energy_generated) as total_generated,
-              AVG(current_output) as average_output,
-              COUNT(*) as total_panels
-          FROM solar_panels
-          WHERE user_id = $1
-      `, [userId]);
-
-      const monthlyResult = await pool.query(`
-          SELECT 
-              EXTRACT(MONTH FROM date) as month, 
-              SUM(energy_generated) as monthly_generation 
-          FROM solar_energy_logs 
-          JOIN solar_panels ON solar_energy_logs.solar_panel_id = solar_panels.id
-          WHERE user_id = $1
-          GROUP BY month
-          ORDER BY month
-      `, [userId]);
-
-      res.json({
-          performance: performanceResult.rows[0],
-          monthly_data: monthlyResult.rows
-      });
+      const result = await pool.query('SELECT * FROM solar_panels WHERE user_id = $1', [userId]);
+      res.json(result.rows);
   } catch (err) {
-      console.error('Erro ao buscar desempenho dos painéis solares:', err);
-      res.status(500).json({ error: 'Erro ao buscar desempenho' });
+      console.error('Erro ao buscar painéis solares:', err);
+      res.status(500).json({ error: 'Erro ao buscar painéis solares' });
+  }
+});
+
+// Rota para excluir um painel solar
+app.delete('/api/solar-panels/:id', async (req, res) => {
+  const panelId = req.params.id;
+  const userId = req.session.userId;
+
+  if (!userId) {
+      return res.status(401).json({ error: 'Usuário não autenticado' });
+  }
+
+  try {
+      const result = await pool.query('DELETE FROM solar_panels WHERE id = $1 AND user_id = $2 RETURNING *', [panelId, userId]);
+      
+      if (result.rowCount === 0) {
+          return res.status(404).json({ error: 'Painel solar não encontrado' });
+      }
+
+      res.status(204).send(); // Retorna sucesso sem conteúdo
+  } catch (err) {
+      console.error('Erro ao excluir painel solar:', err);
+      res.status(500).json({ error: 'Erro ao excluir painel solar' });
+  }
+});
+
+// Rota para verificar consumo e gerar alertas
+app.get('/api/alerts', async (req, res) => {
+  const userId = req.session.userId;
+
+  if (!userId) {
+      return res.status(401).json({ error: 'Usuário não autenticado' });
+  }
+
+  try {
+      const threshold = 1000; // Exemplo: limite de 1000W
+      const result = await pool.query(`
+          SELECT name, consumption FROM devices WHERE user_id = $1 AND consumption > $2
+      `, [userId, threshold]);
+
+      const alerts = result.rows.map(device => {
+          return {
+              device_name: device.name,
+              consumption: device.consumption,
+              created_at: new Date()
+          };
+      });
+
+      // Insere os alertas no banco de dados
+      for (const alert of alerts) {
+          await pool.query('INSERT INTO alerts (user_id, device_name, consumption) VALUES ($1, $2, $3)', [userId, alert.device_name, alert.consumption]);
+      }
+
+      res.json(alerts);
+  } catch (err) {
+      console.error('Erro ao buscar alertas:', err);
+      res.status(500).json({ error: 'Erro ao buscar alertas de consumo' });
   }
 });
 

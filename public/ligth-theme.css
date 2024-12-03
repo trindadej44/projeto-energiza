@@ -1,0 +1,12 @@
+body {
+    --bg-light: #f4f6f9;
+    --text-dark: #333;
+    --card-bg: #ffffff;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+}
+
+.dashboard-card, .stats-badge {
+    background-color: var(--card-bg);
+    color: var(--text-dark);
+}

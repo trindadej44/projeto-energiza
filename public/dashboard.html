@@ -10,322 +10,39 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="ecotip.css" media="screen" />
     
-    <style>
-        :root {
-    --bg-light: #f4f6f9;
-    --bg-dark: #121212;
-    --text-dark: #333;
-    --text-light: #e0e0e0;
-    --sidebar-width: 260px;
-}
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        /* Enhanced Sidebar */
-        .sidebar {
-            width: var(--sidebar-width);
-            height: 100vh;
-            left: -260px;
-            position: fixed;
-            left: 0;
-            top: 0;
-            background: linear-gradient(135deg, #4a90e2 0%, #2c3e50 100%);
-            color: white;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
-        }
-
-        .sidebar-logo {
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .sidebar-menu {
-            padding: 20px 0;
-        }
-
-        .sidebar-menu .nav-link {
-            color: rgba(255,255,255,0.7);
-            padding: 12px 20px;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .sidebar-menu .nav-link:hover,
-        .sidebar-menu .nav-link.active {
-            background-color: rgba(255,255,255,0.1);
-            color: white;
-        }
-
-        .sidebar-menu .nav-link i {
-            font-size: 1.2rem;
-        }
-
-        /* Main Content Area */
-        .main-content {
-            margin-left: var(--sidebar-width);
-            padding: 20px;
-            transition: margin-left 0.3s ease;
-            
-        }
-
-        /* Enhanced Cards */
-        .dashboard-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stats-badge {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
-            border-radius: 12px;
-            background: var(--card-bg);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 0;
-                overflow: hidden;
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-        }
-
-        /* Chart Improvements */
-        .chart-container {
-            position: relative;
-            height: 300px;
-        }
-
-        /* Dark Mode Support */
-        body.dark-mode {
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-
-        .dark-mode .dashboard-card,
-        .dark-mode .stats-badge {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-        }
-        .modal-content {
-        border: none;
-        background-color: #ffffff;
-    }
-
-    .modal-header .btn-close {
-        background-color: #f0f0f0;
-        border-radius: 50%;
-        opacity: 0.7;
-    }
-
-    .input-group-text {
-        background-color: #f8f9fa;
-        border-color: #e9ecef;
-    }
-
-    .form-control, .form-select {
-        border-color: #e9ecef;
-    }
-
-    .btn-primary {
-        background-color: #4a90e2;
-        border-color: #4a90e2;
-        transition: all 0.3s ease;
-    }
-
-    .btn-primary:hover {
-        background-color: #357abd;
-        transform: translateY(-2px);
-    }
-    .dropdown-menu {
-        border: none;
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        padding: 0.5rem 0;
-    }
-
-    .dropdown-item {
-        display: flex;
-        align-items: center;
-        padding: 0.75rem 1.25rem;
-        transition: all 0.3s ease;
-    }
-
-    .dropdown-item:hover {
-        background-color: rgba(0,0,0,0.05);
-    }
-
-    .dropdown-item i {
-        margin-right: 10px;
-        font-size: 1.2rem;
-    }
-
-    /* Estilo do botão de exportar */
-    .btn-outline-secondary {
-        border-color: #6c757d;
-        color: #6c757d;
-        transition: all 0.3s ease;
-    }
-
-    .btn-outline-secondary:hover {
-        background-color: #6c757d;
-        color: white;
-        transform: translateY(-2px);
-    }
-    :root {
-    /* Definição de cores para modo claro e escuro */
-    --bg-light: #f4f6f9;
-    --bg-dark: #121212;
-    --text-light: #333;
-    --text-dark: #e0e0e0;
-    --sidebar-width: 260px;
-}
-
-/* Animação da Sidebar */
-.sidebar {
-    position: fixed;
-    left: -300px; /* Inicialmente escondida */
-    top: 0;
-    height: 100vh;
-    width: var(--sidebar-width);
-    background: linear-gradient(135deg, #4a90e2 0%, #2c3e50 100%);
-    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    z-index: 1000;
-    opacity: 0;
-    transform: translateX(-50px);
-    box-shadow: 10px 0 20px rgba(0,0,0,0.1);
-}
-
-.sidebar.sidebar-visible {
-    left: 0;
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Área de hover */
-.sidebar-trigger {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 30px;
-    height: 100vh;
-    z-index: 999;
-    background: transparent;
-}
-
-/* Modo Escuro Toggle */
-.theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1050;
-}
-
-.dark-mode-toggle {
-    display: none;
-}
-
-.dark-mode-label {
-    cursor: pointer;
-    display: block;
-    width: 60px;
-    height: 30px;
-    background: #333;
-    border-radius: 50px;
-    position: relative;
-    transition: 0.3s;
-}
-
-.sun-icon, .moon-icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: white;
-    transition: 0.3s;
-}
-
-.sun-icon {
-    left: 5px;
-    opacity: 0;
-}
-
-.moon-icon {
-    right: 5px;
-}
-
-.dark-mode-toggle:checked + .dark-mode-label {
-    background: #4a90e2;
-}
-
-.dark-mode-toggle:checked + .dark-mode-label .sun-icon {
-    opacity: 1;
-}
-
-.dark-mode-toggle:checked + .dark-mode-label .moon-icon {
-    opacity: 0;
-}
-
-/* Animações de Dropdown */
-.dropdown-menu {
-    animation: dropdown-fade 0.3s ease;
-    transform-origin: top center;
-}
-
-@keyframes dropdown-fade {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* Modo Escuro Global */
-body.dark-mode {
-    background-color: var(--bg-dark);
-    color: var(--text-dark);
-}
-
-body.dark-mode .dashboard-card {
-    background-color: #1e1e1e;
-    color: var(--text-dark);
-}
-    </style>
+    
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Energize</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#solar-panels">Painéis Solares</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#devices">Dispositivos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#analytics">Análises</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#settings">Configurações</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <!-- Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-logo">
@@ -358,6 +75,15 @@ body.dark-mode .dashboard-card {
                         <i class="bi bi-gear"></i> Configurações
                     </a>
                 </li>
+                <li>
+                    <div class="theme-toggle">
+                        <input type="checkbox" id="dark-mode-toggle" class="dark-mode-toggle">
+                        <label for="dark-mode-toggle" class="dark-mode-label">
+                            <i class="bi bi-sun-fill sun-icon"></i>
+                            <i class="bi bi-moon-fill moon-icon"></i>
+                        </label>
+                    </div>
+                </li>
             </ul>
         </nav>
     </aside>
@@ -376,13 +102,7 @@ body.dark-mode .dashboard-card {
                 <button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#addDeviceModal">
                     <i class="bi bi-plus-circle me-2"></i>Adicionar
                 </button>
-                <div class="theme-toggle">
-                    <input type="checkbox" id="dark-mode-toggle" class="dark-mode-toggle">
-                    <label for="dark-mode-toggle" class="dark-mode-label">
-                        <i class="bi bi-sun-fill sun-icon"></i>
-                        <i class="bi bi-moon-fill moon-icon"></i>
-                    </label>
-                </div>
+                
                 
                 <!-- Botão de Exportar com Dropdown -->
                 <div class="dropdown">
@@ -509,7 +229,25 @@ body.dark-mode .dashboard-card {
                     </div>
                 </div>
             </div>
-
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="dashboard-card p-4">
+                        <h4>Painéis Solares</h4>
+                        <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addSolarPanelModal">Adicionar Painel Solar</button>
+                        <table class="table" id="solarPanelsTable">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Capacidade (W)</th>
+                                    <th>Data de Instalação</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="solarPanelsTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <!-- Charts and Details -->
             <div class="row mt-4">
                 <div class="col-md-8">
@@ -559,6 +297,66 @@ body.dark-mode .dashboard-card {
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="addSolarPanelModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content rounded-4 shadow-lg">
+                    <div class="modal-header border-bottom-0">
+                        <h5 class="modal-title fw-bold">Adicionar Novo Painel Solar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addSolarPanelForm">
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Nome do Painel</label>
+                                <input type="text" class="form-control" id="solarPanelName" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Capacidade (Watts)</label>
+                                <input type="number" class="form-control" id="solarPanelCapacity" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Data de Instalação</label>
+                                <input type="date" class="form-control" id="installationDate" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Localização</label>
+                                <input type="text" class="form-control" id="solarPanelLocation" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg rounded-pill">Adicionar Painel Solar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Dicas Sustentabilidade -->
+<div class="modal fade" id="sustainabilityTipsModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-tree-fill text-success me-2"></i>Dicas de Sustentabilidade
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="sustainabilityTips" class="row g-3">
+                    <!-- Dicas serão inseridas dinamicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Botão Flutuante Eco -->
+<div class="eco-tip-button">
+    <button class="btn btn-success rounded-circle shadow" 
+            data-bs-toggle="modal" 
+            data-bs-target="#sustainabilityTipsModal">
+        <i class="bi bi-lightbulb fs-4"></i>
+    </button>
+</div>
     </main>
 
     <div id="notifications" class="position-fixed" style="z-index: 1050;"></div>
@@ -992,7 +790,67 @@ body.dark-mode .dashboard-card {
             return container;
         }
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sustainabilityTips = [
+                {
+                    title: "Economia de Energia",
+                    description: "Desligue aparelhos em stand-by",
+                    icon: "bi-plug"
+                },
+                {
+                    title: "Iluminação Eficiente", 
+                    description: "Use lâmpadas LED, economizam até 80%",
+                    icon: "bi-lightbulb"
+                },
+                {
+                    title: "Ar-condicionado", 
+                    description: "Regule temperatura entre 22-24°C",
+                    icon: "bi-thermometer-half"
+                }
+            ];
+        
+            const tipsContainer = document.getElementById('sustainabilityTips');
+            
+            sustainabilityTips.forEach(tip => {
+                const tipCard = document.createElement('div');
+                tipCard.className = 'col-md-4';
+                tipCard.innerHTML = `
+                    <div class="card h-100 border-success">
+                        <div class="card-body text-center">
+                            <i class="bi ${tip.icon} text-success fs-2 mb-3"></i>
+                            <h5 class="card-title">${tip.title}</h5>
+                            <p class="card-text">${tip.description}</p>
+                        </div>
+                    </div>
+                `;
+                tipsContainer.appendChild(tipCard);
+            });
+        
+            // Função de Cálculo de Impacto Ambiental
+            function calculateEcoImpact(devices) {
+                const totalConsumption = devices.reduce((sum, device) => 
+                    sum + device.consumption, 0);
+                
+                const carbonFactor = 0.084; // kg CO₂ por kWh
+                const carbonReduction = (totalConsumption / 1000 * carbonFactor).toFixed(2);
+                const energySavings = (totalConsumption / 1000 * 0.75).toFixed(2);
+                const efficiencyScore = Math.min(100, (100 - (totalConsumption / 1000 * 10))).toFixed(0);
+        
+                // Atualizar elementos no dashboard
+                document.getElementById('carbonReduction').textContent = `${carbonReduction} kg CO₂`;
+                document.getElementById('energySavings').textContent = `R$ ${energySavings}`;
+                document.getElementById('efficiencyScore').textContent = `${efficiencyScore}%`;
+            }
+        
+            // Chamar após carregar dispositivos
+            if (typeof devices !== 'undefined') {
+                calculateEcoImpact(devices);
+            }
+        });
+    </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="solarpanel.js"></script>
 </body>
 
 </html>
