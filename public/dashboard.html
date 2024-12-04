@@ -15,29 +15,22 @@
     
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Energize</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#">
+                <img src="/imgs/LogoEnergizePng-removebg-preview.png" width="50" alt="Energize Logo">
+                Energize
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#dashboard">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#solar-panels">Painéis Solares</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#devices">Dispositivos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#analytics">Análises</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#settings">Configurações</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link active" href="#dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#solarPanelsTable"><i class="fas fa-solar-panel"></i> Painéis Solares</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#devices"><i class="fas fa-plug"></i> Dispositivos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#analytics"><i class="fas fa-chart-line"></i> Análises</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings"><i class="fas fa-cog"></i> Configurações</a></li>
                 </ul>
             </div>
         </div>
@@ -93,46 +86,51 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="row mb-4 align-items-center">
-            <div class="col-md-8">
-                <h1 class="mb-0">Painel de Energia</h1>
-                <p class="text-muted">Visão geral do seu consumo de energia</p>
-            </div>
-            <div class="col-md-4 text-end d-flex justify-content-end gap-3">
-                <!-- Botão de Adicionar Dispositivo -->
-                <button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#addDeviceModal">
-                    <i class="bi bi-plus-circle me-2"></i>Adicionar
-                </button>
-                
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="dashboard-card mt-4">
+                            <h2>Painel de Energia <span class="badge bg-success">Eco Score: A+</span></h2>
+                            <div class="d-flex align-items-center mt-4">
+                            <button class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#addDeviceModal">
+                                <i class="bi bi-plus-circle me-2 "></i>Adicionar
+                            </button>
+                            <h1> </h1>
+                            <div class="dropdown">
+                                <button class="btn btn-outline-secondary rounded-pill dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-download me-2"></i>Exportar
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="exportDropdown">
+                                    <li>
+                                        <a class="dropdown-item" href="#" id="exportCSV">
+                                            <i class="bi bi-filetype-csv me-2 text-success"></i>Exportar CSV
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#" id="exportXLSX">
+                                            <i class="bi bi-filetype-xlsx me-2 text-success"></i>Exportar Excel
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#" id="exportPDF">
+                                            <i class="bi bi-file-earmark-pdf me-2 text-danger"></i>Exportar PDF
+                                        </a>
+                                    </li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item" href="#" id="exportAll">
+                                            <i class="bi bi-cloud-download me-2 text-primary"></i>Exportar Tudo
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
                 
                 <!-- Botão de Exportar com Dropdown -->
-                <div class="dropdown">
-                    <button class="btn btn-outline-secondary rounded-pill dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-download me-2"></i>Exportar
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="exportDropdown">
-                        <li>
-                            <a class="dropdown-item" href="#" id="exportCSV">
-                                <i class="bi bi-filetype-csv me-2 text-success"></i>Exportar CSV
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#" id="exportXLSX">
-                                <i class="bi bi-filetype-xlsx me-2 text-success"></i>Exportar Excel
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#" id="exportPDF">
-                                <i class="bi bi-file-earmark-pdf me-2 text-danger"></i>Exportar PDF
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item" href="#" id="exportAll">
-                                <i class="bi bi-cloud-download me-2 text-primary"></i>Exportar Tudo
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                
             </div>
         </div>
         <div class="modal fade" id="addDeviceModal" tabindex="-1">
@@ -198,7 +196,7 @@
             </div>
         </div>
             
-
+            
             <!-- Quick Stats -->
             <div class="row">
                 <div class="col-md-4">
@@ -229,6 +227,34 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-4">
+                <div class="col-md-8">
+                    <div class="dashboard-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4>Lista de Dispositivos</h4>
+                            <input type="text" id="deviceSearch" placeholder="Buscar dispositivo..." class="form-control w-50">
+                        </div>
+                        <table class="table" id="devicesTable">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Consumo (W)</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="devicesTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="dashboard-card p-4">
+                        <h4>Status de Energia</h4>
+                        <canvas id="energyStatusChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
             <div class="row mt-4">
                 <div class="col-md-12">
                     <div class="dashboard-card p-4">
@@ -269,34 +295,7 @@
             </div>
 
             <!-- Device List and Energy Status -->
-            <div class="row mt-4">
-                <div class="col-md-8">
-                    <div class="dashboard-card p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4>Lista de Dispositivos</h4>
-                            <input type="text" id="deviceSearch" placeholder="Buscar dispositivo..." class="form-control w-50">
-                        </div>
-                        <table class="table" id="devicesTable">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Consumo (W)</th>
-                                    <th>Status</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody id="devicesTableBody"></tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="dashboard-card p-4">
-                        <h4>Status de Energia</h4>
-                        <canvas id="energyStatusChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
+            
         <div class="modal fade" id="addSolarPanelModal" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content rounded-4 shadow-lg">
@@ -360,7 +359,9 @@
     </main>
 
     <div id="notifications" class="position-fixed" style="z-index: 1050;"></div>
-
+    <button class="sidebar-toggle" aria-label="Toggle Sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const sidebar = document.getElementById('sidebar');
@@ -848,6 +849,88 @@
                 calculateEcoImpact(devices);
             }
         });
+
+        function updateCO2Reduction() {
+  fetch('/api/co2-reduction')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('co2Reduction').textContent = 
+        `${data.netCO2Reduction} kg`;
+    })
+    .catch(error => console.error('Erro ao buscar redução de CO2:', error));
+}
+
+// Call this when the dashboard loads
+updateCO2Reduction();
+
+
+    </script>
+    <script>
+       async function updateCO2Reduction() {
+    try {
+        const response = await fetch('/api/co2-reduction');
+        
+        // Check if the response is ok
+        if (!response.ok) {
+            throw new Error('Erro ao buscar redução de CO2');
+        }
+        
+        const data = await response.json();
+        
+        // Update CO2 reduction element
+        const co2ReductionElement = document.getElementById('co2Reduction');
+        if (co2ReductionElement) {
+            co2ReductionElement.textContent = `${data.netCO2Reduction} kg`;
+        }
+    } catch (error) {
+        console.error('Erro ao atualizar redução de CO2:', error);
+    }
+}
+
+// Function to update after adding/removing devices or solar panels
+function setupCO2UpdateListeners() {
+    // Listen for device addition
+    const deviceForm = document.querySelector('#addDeviceModal form');
+    if (deviceForm) {
+        deviceForm.addEventListener('submit', async (e) => {
+            await updateCO2Reduction();
+        });
+    }
+
+    // Listen for solar panel addition
+    const solarPanelForm = document.querySelector('#addSolarPanelModal form');
+    if (solarPanelForm) {
+        solarPanelForm.addEventListener('submit', async (e) => {
+            await updateCO2Reduction();
+        });
+    }
+}
+
+// Initialize CO2 reduction update on page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Initial update
+    updateCO2Reduction();
+    
+    // Setup listeners for future updates
+    setupCO2UpdateListeners();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
+    const mainContent = document.querySelector('.main-content');
+
+    sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('sidebar-visible');
+    });
+
+    // Close sidebar when clicking outside on mobile
+    mainContent.addEventListener('click', () => {
+        if (window.innerWidth <= 768 && sidebar.classList.contains('sidebar-visible')) {
+            sidebar.classList.remove('sidebar-visible');
+        }
+    });
+});
     </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="solarpanel.js"></script>

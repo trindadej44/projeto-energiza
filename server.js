@@ -500,5 +500,53 @@ app.get('/api/energy-timeline', async (req, res) => {
     }
   });
 
+  app.get('/api/co2-reduction', async (req, res) => {
+    const userId = req.session.userId;
+  
+    if (!userId) {
+      return res.status(401).json({ error: 'Usuário não autenticado' });
+    }
+  
+    try {
+      // Fetch all devices for the user
+      const devicesResult = await pool.query('SELECT * FROM devices WHERE user_id = $1', [userId]);
+      const devices = devicesResult.rows;
+  
+      // Fetch solar panels for the user
+      const solarpanelsResult = await pool.query('SELECT * FROM solar_panels WHERE user_id = $1', [userId]);
+      const solarPanels = solarpanelsResult.rows;
+  
+      // CO2 calculation constants (these can be adjusted)
+      const CO2_PER_KWH = 0.5; // kg of CO2 per kWh (this is a simplified estimation)
+      const SOLAR_PANEL_CO2_OFFSET_FACTOR = 0.7; // kg of CO2 offset per watt of solar panel
+  
+      // Calculate total device consumption
+      const totalDeviceConsumption = devices.reduce((sum, device) => sum + device.consumption, 0) / 1000; // Convert watts to kWh
+  
+      // Calculate total solar panel offset
+      const totalSolarPanelOffset = solarPanels.reduce((sum, panel) => sum + panel.capacity_watts, 0) * SOLAR_PANEL_CO2_OFFSET_FACTOR / 1000;
+  
+      // Calculate CO2 reduction
+      const co2Produced = totalDeviceConsumption * CO2_PER_KWH;
+      const co2Reduced = Math.max(totalSolarPanelOffset, 0); // Ensure non-negative
+  
+      // Optional: Store CO2 reduction in the database
+      await pool.query(`
+        INSERT INTO co2_reduction (user_id, total_co2_produced, total_co2_reduced, created_at)
+        VALUES ($1, $2, $3, CURRENT_TIMESTAMP)
+      `, [userId, co2Produced, co2Reduced]);
+  
+      res.json({
+        co2Produced: co2Produced.toFixed(2),
+        co2Reduced: co2Reduced.toFixed(2),
+        netCO2Reduction: Math.max(co2Reduced - co2Produced, 0).toFixed(2)
+      });
+  
+    } catch (err) {
+      console.error('Erro ao calcular redução de CO2:', err);
+      res.status(500).json({ error: 'Erro ao calcular redução de CO2' });
+    }
+  });
+
 app.use(['/api/devices', '/api/consumption-forecast'], checkAuthentication);
 
