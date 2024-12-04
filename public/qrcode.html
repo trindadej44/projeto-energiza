@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesse o Energize - QR Code</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <nav class="max-w-7xl mx-auto px-4 py-4 w-full">
+        <div class="flex justify-between items-center">
+            <a href="index.html">
+                <img src="/imgs/LogoEnergizePng-removebg-preview.png" alt="Energize Logo" class="h-12">
+            </a>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center px-4 py-16">
+        <div class="bg-white shadow-lg rounded-2xl p-8 text-center max-w-md w-full">
+            <h1 class="text-3xl font-bold mb-6 gradient-text">Acesse o Energize</h1>
+            
+            <div id="qrcode" class="mx-auto mb-6 w-64 h-64 flex items-center justify-center"></div>
+            
+            <p class="text-gray-600 mb-6">Escaneie o QR Code para acessar o site da Energize rapidamente</p>
+            
+            <div class="space-x-4">
+                <a href="index.html" class="inline-block bg-green-500 text-white px-8 py-3 rounded-full hover:bg-green-600 transition-colors">
+                    Voltar para o Site
+                </a>
+                <button onclick="downloadQRCode()" class="inline-block border-2 border-green-500 text-green-500 px-8 py-3 rounded-full hover:bg-green-500 hover:text-white transition-all">
+                    Baixar QR Code
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            © 2024 Energize. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script>
+        // Generate QR Code
+        window.onload = function() {
+            const siteUrl = 'https://projeto-energize.onrender.com';
+            const qr = qrcode(0, 'M');
+            qr.addData(siteUrl);
+            qr.make();
+            document.getElementById('qrcode').innerHTML = qr.createImgTag(10);
+        }
+
+        // Download QR Code
+        function downloadQRCode() {
+            const qrCodeImg = document.querySelector('#qrcode img');
+            const link = document.createElement('a');
+            link.download = 'energize-qr-code.png';
+            link.href = qrCodeImg.src;
+            link.click();
+        }
+    </script>
+
+    <style>
+        .gradient-text {
+            background: linear-gradient(to right, #10b981, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</body>
+</html>

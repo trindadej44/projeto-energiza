@@ -313,6 +313,8 @@ body.dark-mode .text-muted {
         border-radius: 12px;
         box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         padding: 0.5rem 0;
+        z-index: 99999;  /* Ensure it's above other elements */
+        position: absolute;
     }
 
     .dropdown-item {
@@ -325,7 +327,10 @@ body.dark-mode .text-muted {
     .dropdown-item:hover {
         background-color: rgba(0,0,0,0.05);
     }
-
+    .btn-outline-secondary.dropdown-toggle {
+        position: relative;
+        z-index: 1050;
+      }
     .dropdown-item i {
         margin-right: 10px;
         font-size: 1.2rem;
@@ -651,4 +656,14 @@ body.dark-mode .dropdown-item:hover {
 .eco-tip-button .btn:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 8px rgba(0,0,0,0.2);
+}
+
+.toolbar {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.toolbar .btn {
+    margin-right: 10px;
 }
